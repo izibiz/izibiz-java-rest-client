@@ -1,6 +1,7 @@
 package sample.auth;
 
 import adapter.AuthAdapter;
+
 import model.LoginRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -11,6 +12,7 @@ import java.net.URISyntaxException;
 
 public class AuthSample {
     static AuthAdapter adapter;
+    public static String response;
 
     @BeforeAll
     public static void init() {
@@ -18,14 +20,12 @@ public class AuthSample {
     }
 
     @Test
-    public String canLogin_returnsToken() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void canLogin_returnsToken() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
-        String response = adapter.login(body);
+        response = adapter.login(body);
 
         Assertions.assertNotNull(response);
-
         System.out.println(response);
 
-        return response;
     }
 }

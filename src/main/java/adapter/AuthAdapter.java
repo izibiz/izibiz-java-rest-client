@@ -24,7 +24,7 @@ public class AuthAdapter extends Adapter{
                 .build();
 
         JsonNode bodyObj = (JsonNode) httpClient().send(request);
-
+        System.out.println(bodyObj);
         String response = bodyObj.get("accessToken").asText();
 
         if(null == response) {
