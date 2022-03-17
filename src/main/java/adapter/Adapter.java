@@ -3,6 +3,8 @@ package adapter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import http.EdonusumHttpClient;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,10 @@ public class Adapter {
     private EdonusumHttpClient edonusumHttpClient;
     private ObjectMapper mapper;
     private Map<String, List<String>> headers;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    public String endDate = LocalDate.now().format(formatter);
+    public String startDate = LocalDate.now().plusYears(-2).format(formatter);
 
     public Adapter() {
         edonusumHttpClient = new EdonusumHttpClient();
