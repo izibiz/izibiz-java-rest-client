@@ -12,6 +12,7 @@ import java.util.Map;
 public class Adapter {
     public static final String BASE_URL = "https://apidev.izibiz.com.tr";
     public static final String VERSION = "v1";
+    public static final String ID = "22095062";
 
     private EdonusumHttpClient edonusumHttpClient;
     private ObjectMapper mapper;

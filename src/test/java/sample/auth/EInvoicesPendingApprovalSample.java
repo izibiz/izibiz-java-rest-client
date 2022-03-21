@@ -10,7 +10,7 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EInvoicesInboxSample {
+public class EInvoicesPendingApprovalSample {
     static EInvoiceAdapter adapter;
     static EInvoiceResponse EInvoice;
 
@@ -19,19 +19,20 @@ public class EInvoicesInboxSample {
 
     @BeforeAll
     public static void init() {
-   //     AuthSample authSample= new AuthSample();
+        //     AuthSample authSample= new AuthSample();
         adapter = new EInvoiceAdapter();
-   //     Token = AuthSample.response;
+        //     Token = AuthSample.response;
     }
 
     @Test
-    public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void pendingApprovalList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        EInvoice = adapter.listEInvoices(Token);
+        EInvoice = adapter.pendingApprovalEinvoices(Token);
 
         System.out.println(EInvoice.getContent()[0]);
 
     }
+
 }
