@@ -9,9 +9,10 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EInvoicesStatusInquirySample {
 
+public class EInvoicesViewXMLSample {
     static EInvoiceAdapter adapter;
+    static String xml;
     static EInvoiceResponse EInvoice;
 
     static String Token ;
@@ -25,14 +26,13 @@ public class EInvoicesStatusInquirySample {
     }
 
     @Test
-    public void undeliverableAnswerList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
- //       EInvoice = adapter.StatusInquiryEInvoices(Token);
+        xml = adapter.ViewXMLEInvoices(Token);
 
-        //System.out.println(EInvoice.getContent()[0]);
-        System.out.println(adapter.StatusInquiryEInvoices(Token));
+        System.out.println(xml);
 
     }
 }

@@ -24,4 +24,10 @@ public class EdonusumHttpClient {
         return bodyObj;
     }
 
+    public byte[] sendFile(HttpRequest request) throws  IOException, InterruptedException{
+        HttpResponse<byte[]> resp = client.send(request, HttpResponse.BodyHandlers.ofByteArray());
+
+        return resp.body();
+    }
+
 }

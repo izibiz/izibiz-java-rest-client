@@ -1,5 +1,6 @@
 package sample.auth;
 
+
 import adapter.EInvoiceAdapter;
 import model.LoginRequest;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,7 +10,7 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EInvoicesStatusInquirySample {
+public class EInvoicesApprovalExpiredSampleOutbox {
 
     static EInvoiceAdapter adapter;
     static EInvoiceResponse EInvoice;
@@ -23,16 +24,14 @@ public class EInvoicesStatusInquirySample {
         adapter = new EInvoiceAdapter();
         //     Token = AuthSample.response;
     }
-
     @Test
-    public void undeliverableAnswerList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void approvalExpiredList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
- //       EInvoice = adapter.StatusInquiryEInvoices(Token);
+        EInvoice = adapter.approvalExpiredEInvoices_Outbox(Token);
 
-        //System.out.println(EInvoice.getContent()[0]);
-        System.out.println(adapter.StatusInquiryEInvoices(Token));
+        System.out.println(EInvoice.getContent()[0]);
 
     }
 }
