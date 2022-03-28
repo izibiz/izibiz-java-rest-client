@@ -1,11 +1,10 @@
 package response;
 
-public class EInvoiceResponse {
+public class EArchiveInvoiceResponse {
+    public ContentEArchiveInvoice[] contents;
 
-    public Content[] contents;
-
-    public Content[] getContent() {return contents;}
-    public void setContents(Content[] contents) {this.contents = contents;}
+    public ContentEArchiveInvoice[] getContent() {return contents;}
+    public void setContents(ContentEArchiveInvoice[] contents) {this.contents = contents;}
 
     public Pageable pageable;
 
@@ -16,6 +15,4 @@ public class EInvoiceResponse {
 
     public Object getFilters() {return filters;}
     public void setFilters(Object filters) {this.filters = filters;}
-
 }
-

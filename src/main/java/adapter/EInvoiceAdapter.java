@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class EInvoiceAdapter extends Adapter {
-    public static String URL = BASE_URL + "/" + VERSION + "/einvoices/" ;
+    public String URL = BASE_URL + "/" + VERSION + "/einvoices/" ;
     Adapter adapter = new Adapter();
     EInvoiceResponse eInvoiceResponse;
 
@@ -189,7 +189,7 @@ public class EInvoiceAdapter extends Adapter {
 
     public String ViewPDFEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
         File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Inbox/PDF", ID+".pdf");
-        URL = URL + "inbox/"+ ID + "/pdf";
+        URL = URL + "inbox/"+ ID + "/preview/pdf";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
                 .setHeader("Authorization","Bearer " + token)
@@ -227,7 +227,7 @@ public class EInvoiceAdapter extends Adapter {
     }
     public String ViewXMLEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
         File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Inbox/XML", ID+".xml");
-        URL = URL + "inbox/"+ ID + "/ubl";
+        URL = URL + "inbox/"+ ID + "/preview/ubl";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
                 .setHeader("Authorization","Bearer " + token)
@@ -354,7 +354,7 @@ public class EInvoiceAdapter extends Adapter {
     }
     public String ViewPDFEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
         File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Outbox/PDF", ID+".pdf");
-        URL = URL + "outbox/"+ ID + "/pdf";
+        URL = URL + "outbox/"+ ID + "/preview/pdf";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
                 .setHeader("Authorization","Bearer " + token)
@@ -392,7 +392,7 @@ public class EInvoiceAdapter extends Adapter {
     }
     public String ViewXMLEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
         File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Outbox/XML", ID+".xml");
-        URL = URL + "outbox/"+ ID + "/ubl";
+        URL = URL + "outbox/"+ ID + "/preview/ubl";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
                 .setHeader("Authorization","Bearer " + token)
@@ -409,9 +409,5 @@ public class EInvoiceAdapter extends Adapter {
         return responseData.toString();
 
     }
-
-
-
-
 
 }
