@@ -11,9 +11,10 @@ import response.EArchiveInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EArchiveInvoicesListSample {
+public class EArchiveInvoicesViewPDFSample {
     static EArchiveInvoiceAdapter adapter;
     static EArchiveInvoiceResponse EArchiveInvoice;
+    static String pdf;
 
     static String Token ;
     public static String list;
@@ -26,13 +27,13 @@ public class EArchiveInvoicesListSample {
     }
 
     @Test
-    public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        EArchiveInvoice = adapter.listEArchiveInvoices(Token);
+        pdf = adapter.ViewPDFEArchiveInvoices(Token);
 
-        System.out.println(EArchiveInvoice.getContent()[0]);
+        System.out.println(pdf);
 
     }
 }

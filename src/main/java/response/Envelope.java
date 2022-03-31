@@ -1,14 +1,14 @@
 package response;
 
 public class Envelope {
-    public Object getIdentifier() {
+    public String getIdentifier() {
         return identifier;
     }
 
-    public void setIdentifier(Object identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
-    public Object identifier;
+    public String identifier;
 
 }

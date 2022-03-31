@@ -1,6 +1,5 @@
 package sample.auth;
 
-
 import adapter.EInvoiceAdapter;
 import model.LoginRequest;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,10 +9,9 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-
-public class EInvoicesUndeliverableAnswerSampleOutbox {
-
+public class EInvoicesViewPDFOutboxSample {
     static EInvoiceAdapter adapter;
+    static String pdf;
     static EInvoiceResponse EInvoice;
 
     static String Token ;
@@ -27,13 +25,13 @@ public class EInvoicesUndeliverableAnswerSampleOutbox {
     }
 
     @Test
-    public void undeliverableAnswerList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        EInvoice = adapter.UndeliverableAnswerEInvoices_Outbox(Token);
+        pdf = adapter.ViewPDFEInvoices_Outbox(Token);
 
-        System.out.println(EInvoice.getContent()[0]);
+        System.out.println(pdf);
 
     }
 }

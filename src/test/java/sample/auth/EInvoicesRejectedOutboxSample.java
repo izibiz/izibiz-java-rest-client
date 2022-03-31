@@ -9,13 +9,13 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EInvoicesViewHTMLSampleOutbox {
+public class EInvoicesRejectedOutboxSample {
+
     static EInvoiceAdapter adapter;
-    static String html;
     static EInvoiceResponse EInvoice;
 
     static String Token ;
-
+    public static String list;
 
     @BeforeAll
     public static void init() {
@@ -25,13 +25,13 @@ public class EInvoicesViewHTMLSampleOutbox {
     }
 
     @Test
-    public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void rejectedList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        html = adapter.ViewHTMLEInvoices_Outbox(Token);
+        EInvoice = adapter.RejectedEInvoices_Outbox(Token);
 
-        System.out.println(html);
+        System.out.println(EInvoice.getContent()[0]);
 
     }
 }

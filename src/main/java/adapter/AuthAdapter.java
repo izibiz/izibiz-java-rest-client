@@ -13,13 +13,12 @@ public class AuthAdapter extends Adapter{
     public static final String URL = BASE_URL + "/" + VERSION + "/auth/token";
 
     public String login(LoginRequest body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
-        headersMap().put("Content-Type", List.of("application/json"));
 
         String bodyJson = mapper().writeValueAsString(body);
 
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
-                .setHeader("Content-Type", "application/json")
+                .setHeader("Content-Type", "application/json") //enum
                 .POST(HttpRequest.BodyPublishers.ofString(bodyJson))
                 .build();
 

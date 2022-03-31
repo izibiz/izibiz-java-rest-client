@@ -12,7 +12,7 @@ import java.util.Map;
 public class Adapter {
     public static final String BASE_URL = "https://apidev.izibiz.com.tr";
     public static final String VERSION = "v1";
-    public static final String ID = "22095492";
+    public static final String ID = "114318159";
 
     private EdonusumHttpClient edonusumHttpClient;
     private ObjectMapper mapper;
@@ -36,7 +36,4 @@ public class Adapter {
         return this.edonusumHttpClient;
     }
 
-    public Map<String, List<String>> headersMap() {
-        return this.headers;
-    }
 }

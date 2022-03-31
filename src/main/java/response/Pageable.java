@@ -3,7 +3,8 @@ package response;
 public class Pageable {
     public int page;
     public int size;
-
+    public int totalElements;
+    public int totalPages;
     public int getPage() {
         return page;
     }
@@ -36,6 +37,5 @@ public class Pageable {
         this.totalPages = totalPages;
     }
 
-    public int totalElements;
-    public int totalPages;
+
 }

@@ -1,8 +1,6 @@
 package response;
 
-import java.time.LocalDate;
-
-public class Content {
+public class ContentEDespatch {
     public int id;
     public Object documentType;
     public String issueDate;
@@ -18,7 +16,7 @@ public class Content {
     public String taxAmount;
     public int lineCount;
     public String profile;
-    public String erpReadFlag;
+    public Boolean erpReadFlag;
     public AccountingSupplier accountingSupplier;
     public AccountingCustomer accountingCustomer;
     public String supplierAlias;
@@ -26,16 +24,9 @@ public class Content {
     public String supplierSSN;
     public String customerSSN;
     public String type;
-    public String invoiceType;
-    public String statusDesc;
-    public String note;
-    public String responseDescription;
-    public String orderReference;
+    public String orderReferenceId;
     public String orderReferenceDate;
-    public Envelope envelope;
-    public String gtbRegistrationNo;
-    public String gtbExportDate;
-    public String gtbRefNo;
+    public String statusDesc;
     public int statusCode;
     public String statusCodeDesc;
     public String supplierName;
@@ -121,7 +112,7 @@ public class Content {
         this.readStatus = readStatus;
     }
 
-    public Object getDocumentStatus() {
+    public DocumentStatus getDocumentStatus() {
         return documentStatus;
     }
 
@@ -161,15 +152,15 @@ public class Content {
         this.profile = profile;
     }
 
-    public String getErpReadFlag() {
+    public Boolean getErpReadFlag() {
         return erpReadFlag;
     }
 
-    public void setErpReadFlag(String erpReadFlag) {
+    public void setErpReadFlag(Boolean erpReadFlag) {
         this.erpReadFlag = erpReadFlag;
     }
 
-    public Object getAccountingSupplier() {
+    public AccountingSupplier getAccountingSupplier() {
         return accountingSupplier;
     }
 
@@ -177,7 +168,7 @@ public class Content {
         this.accountingSupplier = accountingSupplier;
     }
 
-    public Object getAccountingCustomer() {
+    public AccountingCustomer getAccountingCustomer() {
         return accountingCustomer;
     }
 
@@ -225,44 +216,12 @@ public class Content {
         this.type = type;
     }
 
-    public String getInvoiceType() {
-        return invoiceType;
+    public String getOrderReferenceId() {
+        return orderReferenceId;
     }
 
-    public void setInvoiceType(String invoiceType) {
-        this.invoiceType = invoiceType;
-    }
-
-    public String getStatusDesc() {
-        return statusDesc;
-    }
-
-    public void setStatusDesc(String statusDesc) {
-        this.statusDesc = statusDesc;
-    }
-
-    public String getNote() {
-        return note;
-    }
-
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getResponseDescription() {
-        return responseDescription;
-    }
-
-    public void setResponseDescription(String responseDescription) {
-        this.responseDescription = responseDescription;
-    }
-
-    public String getOrderReference() {
-        return orderReference;
-    }
-
-    public void setOrderReference(String orderReference) {
-        this.orderReference = orderReference;
+    public void setOrderReferenceId(String orderReferenceId) {
+        this.orderReferenceId = orderReferenceId;
     }
 
     public String getOrderReferenceDate() {
@@ -273,36 +232,12 @@ public class Content {
         this.orderReferenceDate = orderReferenceDate;
     }
 
-    public Object getEnvelope() {
-        return envelope;
+    public String getStatusDesc() {
+        return statusDesc;
     }
 
-    public void setEnvelope(Envelope envelope) {
-        this.envelope = envelope;
-    }
-
-    public String getGtbRegistrationNo() {
-        return gtbRegistrationNo;
-    }
-
-    public void setGtbRegistrationNo(String gtbRegistrationNo) {
-        this.gtbRegistrationNo = gtbRegistrationNo;
-    }
-
-    public String getGtbExportDate() {
-        return gtbExportDate;
-    }
-
-    public void setGtbExportDate(String gtbExportDate) {
-        this.gtbExportDate = gtbExportDate;
-    }
-
-    public String getGtbRefNo() {
-        return gtbRefNo;
-    }
-
-    public void setGtbRefNo(String gtbRefNo) {
-        this.gtbRefNo = gtbRefNo;
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
     }
 
     public int getStatusCode() {

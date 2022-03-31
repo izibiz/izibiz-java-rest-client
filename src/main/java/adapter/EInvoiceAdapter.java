@@ -37,12 +37,12 @@ public class EInvoiceAdapter extends Adapter {
 
         System.out.println(responseData);
         String response = responseData.toString();
-    //  eInvoiceResponse = mapper().readValue(response,EInvoiceResponse.class);
+    //  eInvoiceResponse = mapper().readValue(response,EInvoiceResponse.class);  //java generic method
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
 
         System.out.println(eInvoiceResponse.contents[0]);
 
-        if(null == response) {
+        if(null == response) {// string utils apache commons
             response = responseData.asText();
         }
 
@@ -198,7 +198,7 @@ public class EInvoiceAdapter extends Adapter {
 
         byte[] responseData = httpClient().sendFile(request);
 
-        FileOutputStream pdfFile = new FileOutputStream(file);
+        FileOutputStream pdfFile = new FileOutputStream(file);//try with resource
         byte[] decoder = responseData;
 
         pdfFile.write(decoder);
@@ -207,8 +207,8 @@ public class EInvoiceAdapter extends Adapter {
 
     }
     public String ViewHTMLEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
-        File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Inbox/HTML", ID+".html");
-        URL = URL + "inbox/"+ ID + "/html";
+        File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Inbox/HTML", ID+".html");// files
+        URL = URL + "inbox/"+ ID + "/preview/html";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
                 .setHeader("Authorization","Bearer " + token)
@@ -226,7 +226,7 @@ public class EInvoiceAdapter extends Adapter {
 
     }
     public String ViewXMLEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
-        File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Inbox/XML", ID+".xml");
+        File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Inbox/XML", ID+".xml");//file utils
         URL = URL + "inbox/"+ ID + "/preview/ubl";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
@@ -263,7 +263,7 @@ public class EInvoiceAdapter extends Adapter {
 
 
 
-        System.out.println(eInvoiceResponse.contents[0]);
+        System.out.println(eInvoiceResponse.contents[0]);  //sonarlint eklentisi
 
         if(null == response) {
             response = responseData.asText();
@@ -373,7 +373,7 @@ public class EInvoiceAdapter extends Adapter {
     }
     public String ViewHTMLEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
         File file = new File("C:/Users/Özgür/Desktop/İzibiz/Kayit/EInvoice/Outbox/HTML", ID+".html");
-        URL = URL + "outbox/"+ ID + "/html";
+        URL = URL + "outbox/"+ ID + "/preview/html";
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(URL))
                 .setHeader("Authorization","Bearer " + token)
@@ -408,6 +408,58 @@ public class EInvoiceAdapter extends Adapter {
 
         return responseData.toString();
 
+    }
+
+    public String statusEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        URL = URL +"/inbox"+ "/lookup-statuses";
+        System.out.println(URL);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(URL))
+                .setHeader("Authorization","Bearer " + token)
+                .GET()
+                .build();
+
+        JsonNode responseData = (JsonNode) httpClient().send(request);
+
+        System.out.println(responseData);
+        String response = responseData.toString();
+
+
+        System.out.println(response);
+
+        if(null == response) {
+            response = responseData.asText();
+        }
+
+        return response;
+    }
+
+    public String statusEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        URL = URL +"/outbox"+ "/lookup-statuses";
+        System.out.println(URL);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(URL))
+                .setHeader("Authorization","Bearer " + token)
+                .GET()
+                .build();
+
+        JsonNode responseData = (JsonNode) httpClient().send(request);
+
+        System.out.println(responseData);
+        String response = responseData.toString();
+
+
+        System.out.println(response);
+
+        if(null == response) {
+            response = responseData.asText();
+        }
+
+        return response;
     }
 
 }

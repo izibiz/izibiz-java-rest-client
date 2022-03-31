@@ -9,7 +9,7 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EInvoicesRejectedSampleOutbox {
+public class EInvoicesPendingApprovalOutboxSample {
 
     static EInvoiceAdapter adapter;
     static EInvoiceResponse EInvoice;
@@ -25,11 +25,11 @@ public class EInvoicesRejectedSampleOutbox {
     }
 
     @Test
-    public void rejectedList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void pendingApprovalList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        EInvoice = adapter.RejectedEInvoices_Outbox(Token);
+        EInvoice = adapter.pendingApprovalEinvoices_Outbox(Token);
 
         System.out.println(EInvoice.getContent()[0]);
 

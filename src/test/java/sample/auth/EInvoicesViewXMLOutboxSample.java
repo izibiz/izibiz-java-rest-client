@@ -1,19 +1,19 @@
 package sample.auth;
 
-import adapter.EArchiveInvoiceAdapter;
-
+import adapter.EInvoiceAdapter;
 import model.LoginRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import response.EArchiveInvoiceResponse;
-
+import response.EInvoiceResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EArchiveInvoicesListSample {
-    static EArchiveInvoiceAdapter adapter;
-    static EArchiveInvoiceResponse EArchiveInvoice;
+public class EInvoicesViewXMLOutboxSample {
+
+    static EInvoiceAdapter adapter;
+    static String xml;
+    static EInvoiceResponse EInvoice;
 
     static String Token ;
     public static String list;
@@ -21,18 +21,18 @@ public class EArchiveInvoicesListSample {
     @BeforeAll
     public static void init() {
         //     AuthSample authSample= new AuthSample();
-        adapter = new EArchiveInvoiceAdapter();
+        adapter = new EInvoiceAdapter();
         //     Token = AuthSample.response;
     }
 
     @Test
-    public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        EArchiveInvoice = adapter.listEArchiveInvoices(Token);
+        xml = adapter.ViewXMLEInvoices_Outbox(Token);
 
-        System.out.println(EArchiveInvoice.getContent()[0]);
+        System.out.println(xml);
 
     }
 }

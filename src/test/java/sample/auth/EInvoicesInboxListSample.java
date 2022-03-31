@@ -10,7 +10,7 @@ import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EInvoicesInboxSample {
+public class EInvoicesInboxListSample {
     static EInvoiceAdapter adapter;
     static EInvoiceResponse EInvoice;
 
