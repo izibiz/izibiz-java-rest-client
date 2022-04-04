@@ -13,6 +13,7 @@ public class Adapter {
     public static final String BASE_URL = "https://apidev.izibiz.com.tr";
     public static final String VERSION = "v1";
     public static final String ID = "114318159";
+    public static final String PATH = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/";
 
     private EdonusumHttpClient edonusumHttpClient;
     private ObjectMapper mapper;
@@ -28,6 +29,7 @@ public class Adapter {
         mapper = new ObjectMapper();
     }
 
+
     public ObjectMapper mapper() {
         return this.mapper;
     }
@@ -35,5 +37,6 @@ public class Adapter {
     public EdonusumHttpClient httpClient() {
         return this.edonusumHttpClient;
     }
+
 
 }

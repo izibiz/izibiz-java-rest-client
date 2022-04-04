@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class AuthSample {
-    static AuthAdapter adapter;
+    public static AuthAdapter adapter;
     public static String response;
 
     @BeforeAll
@@ -20,7 +20,7 @@ public class AuthSample {
     }
 
     @Test
-    public void canLogin_returnsToken() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+    public void login() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         response = adapter.login(body);
 
