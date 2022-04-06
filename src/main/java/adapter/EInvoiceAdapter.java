@@ -67,8 +67,11 @@ public class EInvoiceAdapter extends Adapter {
     //public EInvoiceResponse StatusInquiryEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
     public String StatusInquiryEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL + "inbox/"+ ID;
-        String response = httpClient().send(token, url, "GET");
+        String response="";
+        for (Content content:eInvoiceResponseList.contents) {
+            String url = URL + "inbox/" + content.id;
+            response = httpClient().send(token, url, "GET");
+        }
         return response;
 
     }
