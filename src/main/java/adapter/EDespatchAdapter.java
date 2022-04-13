@@ -23,7 +23,7 @@ public class EDespatchAdapter extends Adapter {
     EDespatchResponse eDespatchResponseList;
     EDespatchResponse eDespatchResponseList_outbox;
 
-    public EDespatchResponse listEDespatchInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EDespatchResponse listEDespatches(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL ;
         String response = httpClient().send(token, url, "GET");
@@ -76,7 +76,7 @@ public class EDespatchAdapter extends Adapter {
 
         return response;
     }
-    public EDespatchResponse listEDespatchInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EDespatchResponse listEDespatches_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=WaitingForResponse&page=0&pageSize=100&sortProperty=createDate&sort=asc" ;
         String response = httpClient().send(token, url, "GET");
