@@ -2,19 +2,17 @@ package EDespatchReceiptSamples;
 
 import adapter.AuthAdapter;
 import adapter.EDespatchReceiptAdapter;
-import adapter.EInvoiceAdapter;
 import model.LoginRequest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import response.EDespatchReceiptResponse;
-import response.EInvoiceResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EDespatchReceiptSamples {
+public class EDespatchReceiptSample {
     static EDespatchReceiptAdapter adapter;
     static EDespatchReceiptResponse EDespatchReceipt;
     static EDespatchReceiptResponse EDespatchReceiptList;
