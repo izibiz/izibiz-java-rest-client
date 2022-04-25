@@ -1,21 +1,21 @@
-package EExchangeSamples;
+package ECheckSamples;
 
 import adapter.AuthAdapter;
+import adapter.ECheckAdapter;
 import adapter.EExchangeAdapter;
-
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
-import response.EExchangeResponse;
+import response.ECheckResponse;
 
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EExchangeSample {
-    static EExchangeAdapter adapter;
-    static EExchangeResponse EExchange;
-    static EExchangeResponse EExchangeList;
-    static EExchangeResponse EExchangeList2;
+public class ECheckSample {
+    static ECheckAdapter adapter;
+    static ECheckResponse ECheck;
+    static ECheckResponse ECheckList;
+    static ECheckResponse ECheckList2;
     static adapter.AuthAdapter AuthAdapter;
 
     static String Token ;
@@ -24,7 +24,7 @@ public class EExchangeSample {
     @BeforeAll
     public static void init() {
         //     AuthSample authSample= new AuthSample();
-        adapter = new EExchangeAdapter();
+        adapter = new ECheckAdapter();
         AuthAdapter = new AuthAdapter();
         //     Token = AuthSample.response;
     }
@@ -44,25 +44,25 @@ public class EExchangeSample {
     @Order(2)
     public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EExchangeList = adapter.listEExchange(Token);
-        Assertions.assertNotNull(EExchangeList.getContent()[0]);
-        System.out.println(EExchangeList.getContent()[0].id);
+        ECheckList = adapter.listECheck(Token);
+        Assertions.assertNotNull(ECheckList.getContent()[0]);
+        System.out.println(ECheckList.getContent()[0].id);
 
     }
     @Test
     @Order(3)
     public void canListByCreationDate() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EExchangeList2 = adapter.listByCreationDateEExchange(Token);
-        Assertions.assertNotNull(EExchangeList2.getContent()[0]);
-        System.out.println(EExchangeList2.getContent()[0].id);
+        ECheckList2 = adapter.listByCreationDateECheck(Token);
+        Assertions.assertNotNull(ECheckList2.getContent()[0]);
+        System.out.println(ECheckList2.getContent()[0].id);
 
     }
     @Test
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEExchange(Token);
+        String xml = adapter.ViewXMLECheck(Token);
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -72,7 +72,7 @@ public class EExchangeSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEExchange(Token);
+        String html = adapter.ViewHTMLECheck(Token);
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -82,7 +82,7 @@ public class EExchangeSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEExchange(Token);
+        String pdf = adapter.ViewPDFECheck(Token);
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -91,10 +91,9 @@ public class EExchangeSample {
     @Order(7)
     public void status() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.statusEExchange(Token);
+        String status = adapter.statusECheck(Token);
         Assertions.assertNotNull(status);
         System.out.println(status);
 
     }
-
 }

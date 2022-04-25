@@ -15,14 +15,14 @@ public class EExchangeAdapter extends Adapter {
     EExchangeResponse eExchangeResponseList2;
     EExchangeResponse eExchangeResponse;
 
-    public EExchangeResponse listESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EExchangeResponse listEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
         String response = httpClient().send(token, url, "GET");
         eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);//java generic method
         return eExchangeResponseList;
     }
-    public EExchangeResponse listByCreationDateESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EExchangeResponse listByCreationDateEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
         String response = httpClient().send(token, url, "GET");
