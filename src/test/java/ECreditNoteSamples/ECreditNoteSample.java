@@ -4,16 +4,13 @@ import adapter.AuthAdapter;
 import adapter.ECreditNoteAdapter;
 import adapter.ESmmAdapter;
 import model.LoginRequest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import response.ECreditNoteResponse;
 import response.ESmmResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ECreditNoteSample {
     static ECreditNoteAdapter adapter;
     static ECreditNoteResponse ECreditNote;

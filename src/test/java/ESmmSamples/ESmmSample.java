@@ -10,7 +10,7 @@ import sample.auth.AuthSample;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ESmmSample {
     static ESmmAdapter adapter;
     static ESmmResponse ESmm;

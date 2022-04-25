@@ -30,7 +30,7 @@ public class EDespatchesListSample {
         AuthSample.init();
         LoginRequest body = new LoginRequest("izibiz-dev","izi321");
         Token = AuthSample.adapter.login(body);
-        EDespatch = adapter.listEArchiveInvoices(Token);
+        EDespatch = adapter.listEDespatches(Token);
 
         System.out.println(EDespatch.getContent()[0]);
 

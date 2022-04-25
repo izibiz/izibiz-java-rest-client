@@ -3,15 +3,12 @@ package EDespatchSamples;
 import adapter.AuthAdapter;
 import adapter.EDespatchAdapter;
 import model.LoginRequest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import response.EDespatchResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EDespatchSample {
     static EDespatchAdapter adapter;
     static EDespatchResponse EDespatch;

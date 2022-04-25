@@ -1,21 +1,21 @@
-package EArchiveInvoiceSamples;
+package EExchangeSamples;
 
 import adapter.AuthAdapter;
-import adapter.EArchiveInvoiceAdapter;
-import adapter.EInvoiceAdapter;
+import adapter.EExchangeAdapter;
+
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
-import response.EArchiveInvoiceResponse;
-import response.EInvoiceResponse;
+import response.EExchangeResponse;
+
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class EArchiveInvoiceSample {
-    static EArchiveInvoiceAdapter adapter;
-    static EArchiveInvoiceResponse EArchiveInvoice;
-    static EArchiveInvoiceResponse EArchiveInvoiceList;
-    static EArchiveInvoiceResponse EArchiveInvoiceOutbox;
+public class EExchangeSample {
+    static EExchangeAdapter adapter;
+    static EExchangeResponse EExchange;
+    static EExchangeResponse EExchangeList;
+    static EExchangeResponse EExchangeList2;
     static adapter.AuthAdapter AuthAdapter;
 
     static String Token ;
@@ -24,11 +24,10 @@ public class EArchiveInvoiceSample {
     @BeforeAll
     public static void init() {
         //     AuthSample authSample= new AuthSample();
-        adapter = new EArchiveInvoiceAdapter();
+        adapter = new EExchangeAdapter();
         AuthAdapter = new AuthAdapter();
         //     Token = AuthSample.response;
     }
-
     @Test
     @Order(1)
     public void login() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
@@ -40,52 +39,62 @@ public class EArchiveInvoiceSample {
 
     }
 
+
     @Test
     @Order(2)
     public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EArchiveInvoiceList = adapter.listEArchiveInvoices(Token);
-        Assertions.assertNotNull(EArchiveInvoiceList.getContent()[0]);
-        System.out.println(EArchiveInvoiceList.getContent()[0].id);
+        EExchangeList = adapter.listESmm(Token);
+        Assertions.assertNotNull(EExchangeList.getContent()[0]);
+        System.out.println(EExchangeList.getContent()[0].id);
 
     }
-
     @Test
     @Order(3)
+    public void canListByCreationDate() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+
+        EExchangeList2 = adapter.listByCreationDateESmm(Token);
+        Assertions.assertNotNull(EExchangeList2.getContent()[0]);
+        System.out.println(EExchangeList2.getContent()[0].id);
+
+    }
+    @Test
+    @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEArchiveInvoices(Token);
+        String xml = adapter.ViewXMLEExchange(Token);
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
     }
 
     @Test
-    @Order(4)
+    @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEArchiveInvoices(Token);
+        String html = adapter.ViewHTMLEExchange(Token);
         Assertions.assertNotNull(html);
         System.out.println(html);
 
     }
 
     @Test
-    @Order(5)
+    @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEArchiveInvoices(Token);
+        String pdf = adapter.ViewPDFEExchange(Token);
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
     }
     @Test
-    @Order(6)
+    @Order(7)
     public void status() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.statusEArchiveInvoices(Token);
+        String status = adapter.statusEExchange(Token);
         Assertions.assertNotNull(status);
         System.out.println(status);
 
     }
+
 }
