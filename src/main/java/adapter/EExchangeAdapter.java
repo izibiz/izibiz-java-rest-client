@@ -59,7 +59,7 @@ public class EExchangeAdapter extends Adapter {
         String response="";
         for (ContentEExchange content:eExchangeResponseList.contents) {
             File file = new File(PATH + "EExchange/XML", content.id+".xml");
-            String url = URL + "/"+ content.id + "/download/ubl";
+            String url = URL + "/"+ content.id + "/preview/ubl";
             response = httpClient().sendFile(token, url, file);
         }
 
