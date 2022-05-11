@@ -24,7 +24,7 @@ public class EArchiveInvoiceAdapter extends Adapter {
     public EArchiveInvoiceResponse listEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eArchiveInvoiceResponseList = new Gson().fromJson(response, EArchiveInvoiceResponse.class);
 
         return EArchiveInvoiceResponse;
@@ -71,7 +71,7 @@ public class EArchiveInvoiceAdapter extends Adapter {
     public String statusEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 }

@@ -20,14 +20,14 @@ public class ESmmAdapter extends Adapter {
     public ESmmResponse listESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);//java generic method
         return eSmmResponseList;
     }
     public ESmmResponse listByCreationDateESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);//java generic method
         return eSmmResponseList;
     }
@@ -70,7 +70,7 @@ public class ESmmAdapter extends Adapter {
     public String statusESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 }

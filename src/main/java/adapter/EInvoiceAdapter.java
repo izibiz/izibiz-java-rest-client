@@ -24,7 +24,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse listEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"inbox?dateType=DELIVERY&status=New&startDate="+ adapter.startDate + "&endDate=" + adapter.endDate + "&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponseList = new Gson().fromJson(response,EInvoiceResponse.class);//java generic method
         return eInvoiceResponseList;
     }
@@ -32,7 +32,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse pendingApprovalEinvoices(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?page=0&sortProperty=customerName&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponse;
     }
@@ -40,7 +40,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse approvalExpiredEInvoices(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "inbox?status=ResponseTimeExpired&page=0&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponse;
     }
@@ -48,7 +48,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse UndeliverableAnswerEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "inbox?status=ResponseUnDelivered&dateType=DELIVERY&startDate="+ adapter.startDate + "&endDate="+ adapter.endDate+ "&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
 
         return eInvoiceResponse;
@@ -58,7 +58,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse RejectedEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "inbox?status=Rejected&dateType=DELIVERY&startDate="+ adapter.startDate + "&endDate="+ adapter.endDate+ "&page=0&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponse;
 
@@ -70,7 +70,7 @@ public class EInvoiceAdapter extends Adapter {
         String response="";
         for (Content content:eInvoiceResponseList.contents) {
             String url = URL + "inbox/" + content.id;
-            response = httpClient().send(token, url, "GET");
+            response = httpClient().send(token, url);
         }
         return response;
 
@@ -115,7 +115,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse listEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"outbox?dateType=DELIVERY&status=New&startDate="+ adapter.startDate + "&endDate=" + adapter.endDate + "&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponseList_outbox = new Gson().fromJson(response,EInvoiceResponse.class);//java generic method
         return eInvoiceResponseList_outbox;
     }
@@ -123,7 +123,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse pendingApprovalEinvoices_Outbox(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=WaitingForResponse&page=0&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
 
         return eInvoiceResponse;
@@ -132,7 +132,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse approvalExpiredEInvoices_Outbox(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=ResponseTimeExpired&page=0&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponse;
     }
@@ -140,7 +140,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse UndeliverableAnswerEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=UnDelivered&dateType=DELIVERY&startDate="+adapter.startDate+"&endDate="+adapter.endDate+"&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponse;
 
@@ -149,7 +149,7 @@ public class EInvoiceAdapter extends Adapter {
     public EInvoiceResponse RejectedEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=Rejected&dateType=DELIVERY&startDate="+adapter.startDate+"&endDate="+adapter.endDate+"&page=0&pageSize=100&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eInvoiceResponse = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponse;
 
@@ -196,14 +196,14 @@ public class EInvoiceAdapter extends Adapter {
     public String statusEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/inbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 
     public String statusEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/outbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 

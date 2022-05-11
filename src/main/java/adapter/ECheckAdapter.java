@@ -20,14 +20,14 @@ public class ECheckAdapter extends Adapter {
     public ECheckResponse listECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);//java generic method
         return eCheckResponseList;
     }
     public ECheckResponse listByCreationDateECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);//java generic method
         return eCheckResponseList;
     }
@@ -70,7 +70,7 @@ public class ECheckAdapter extends Adapter {
     public String statusECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 }

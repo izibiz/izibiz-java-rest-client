@@ -19,14 +19,14 @@ public class ECreditNoteAdapter extends Adapter {
     public ECreditNoteResponse listECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);//java generic method
         return eCreditNoteResponseList;
     }
     public ECreditNoteResponse listByCreationDateECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);//java generic method
         return eCreditNoteResponseList;
     }
@@ -68,7 +68,7 @@ public class ECreditNoteAdapter extends Adapter {
     public String statusECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 }

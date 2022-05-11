@@ -1,6 +1,8 @@
 package adapter;
 
 import com.google.gson.Gson;
+import model.DownloadRequest;
+import model.LoginRequest;
 import response.*;
 
 import java.io.File;
@@ -18,14 +20,14 @@ public class EExchangeAdapter extends Adapter {
     public EExchangeResponse listEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);//java generic method
         return eExchangeResponseList;
     }
     public EExchangeResponse listByCreationDateEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);//java generic method
         return eExchangeResponseList;
     }
@@ -68,7 +70,29 @@ public class EExchangeAdapter extends Adapter {
     public String statusEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
+        return response;
+    }
+
+    public String downloadXMLEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+        String url = URL +"/download/ubl";
+        String path = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/EExchange/XML/Downloads/";
+
+        String response = httpClient().sendDownload(token, url, body,path);
+        return response;
+    }
+    public String downloadHTMLEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+        String url = URL +"/download/html";
+        String path = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/EExchange/HTML/Downloads/";
+
+        String response = httpClient().sendDownload(token, url, body,path);
+        return response;
+    }
+    public String downloadPDFEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+        String url = URL +"/download/pdf";
+        String path = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/EExchange/PDF/Downloads/";
+
+        String response = httpClient().sendDownload(token, url, body,path);
         return response;
     }
 }

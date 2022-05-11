@@ -3,6 +3,7 @@ package EExchangeSamples;
 import adapter.AuthAdapter;
 import adapter.EExchangeAdapter;
 
+import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EExchangeResponse;
@@ -95,6 +96,36 @@ public class EExchangeSample {
         Assertions.assertNotNull(status);
         System.out.println(status);
 
+    }
+    @Test
+    @Order(8)
+    public void downloadXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest("97");
+        DownloadRequest body2 = new DownloadRequest("95");
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadXMLEExchange(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(9)
+    public void downloadHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest("97");
+        DownloadRequest body2 = new DownloadRequest("95");
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadHTMLEExchange(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(10)
+    public void downloadPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest("97");
+        DownloadRequest body2 = new DownloadRequest("95");
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadPDFEExchange(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
     }
 
 }

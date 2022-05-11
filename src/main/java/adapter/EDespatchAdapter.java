@@ -26,7 +26,7 @@ public class EDespatchAdapter extends Adapter {
     public EDespatchResponse listEDespatches(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL ;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eDespatchResponseList = new Gson().fromJson(response, EDespatchResponse.class);//java generic method
         return eDespatchResponseList;
     }
@@ -36,7 +36,7 @@ public class EDespatchAdapter extends Adapter {
         String response="";
         for (ContentEDespatch content:eDespatchResponseList.contents) {
             String url = URL + "inbox/" + content.id;
-            response = httpClient().send(token, url, "GET");
+            response = httpClient().send(token, url);
         }
         return response;
     }
@@ -79,7 +79,7 @@ public class EDespatchAdapter extends Adapter {
     public EDespatchResponse listEDespatches_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=WaitingForResponse&page=0&pageSize=100&sortProperty=createDate&sort=asc" ;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eDespatchResponseList_outbox = new Gson().fromJson(response, EDespatchResponse.class);//java generic method
         return eDespatchResponseList_outbox;
     }
@@ -122,14 +122,14 @@ public class EDespatchAdapter extends Adapter {
     public String statusEDespathces(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/inbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 
     public String statusEDespathes_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/outbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 

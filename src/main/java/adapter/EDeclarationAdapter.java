@@ -20,14 +20,14 @@ public class EDeclarationAdapter extends Adapter {
     public EDeclarationResponse listEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);//java generic method
         return eDeclarationResponseList;
     }
     public EDeclarationResponse listByCreationDateEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);//java generic method
         return eDeclarationResponseList;
     }
@@ -70,7 +70,7 @@ public class EDeclarationAdapter extends Adapter {
     public String statusEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url, "GET");
+        String response = httpClient().send(token, url);
         return response;
     }
 }
