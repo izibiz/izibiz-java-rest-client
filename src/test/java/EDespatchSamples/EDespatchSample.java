@@ -2,6 +2,7 @@ package EDespatchSamples;
 
 import adapter.AuthAdapter;
 import adapter.EDespatchAdapter;
+import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EDespatchResponse;
@@ -42,7 +43,7 @@ public class EDespatchSample {
     @Order(2)
     public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EDespatchList = adapter.listEDespatches(Token);
+        EDespatchList = adapter.listEDespatch(Token);
         Assertions.assertNotNull(EDespatchList.getContent()[0]);
         System.out.println(EDespatchList.getContent()[0].id);
 
@@ -51,7 +52,7 @@ public class EDespatchSample {
     @Order(3)
     public void statusInquiry() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.StatusInquiryEDespatches(Token);
+        String status = adapter.StatusInquiryEDespatch(Token);
         Assertions.assertNotNull(status);
         System.out.println(status);
 
@@ -60,7 +61,7 @@ public class EDespatchSample {
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEDespatches(Token);
+        String xml = adapter.ViewXMLEDespatch(Token);
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -70,7 +71,7 @@ public class EDespatchSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEDespatches(Token);
+        String html = adapter.ViewHTMLEDespatch(Token);
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -80,7 +81,7 @@ public class EDespatchSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewXMLEDespatches(Token);
+        String pdf = adapter.ViewXMLEDespatch(Token);
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -89,7 +90,7 @@ public class EDespatchSample {
     @Order(7)
     public void canListOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EDespatchList = adapter.listEDespatches_Outbox(Token);
+        EDespatchOutbox = adapter.listEDespatch_Outbox(Token);
         Assertions.assertNotNull(EDespatchList.getContent()[0]);
         System.out.println(EDespatchList.getContent()[0]);
 
@@ -98,7 +99,7 @@ public class EDespatchSample {
     @Order(8)
     public void viewHTMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEDespatches_Outbox(Token);
+        String html = adapter.ViewHTMLEDespatch_Outbox(Token);
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -107,7 +108,7 @@ public class EDespatchSample {
     @Order(9)
     public void viewPDFOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEDespatches_Outbox(Token);
+        String pdf = adapter.ViewPDFEDespatch_Outbox(Token);
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -116,7 +117,7 @@ public class EDespatchSample {
     @Order(10)
     public void viewXMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEDespatches_Outbox(Token);
+        String xml = adapter.ViewXMLEDespatch_Outbox(Token);
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -125,7 +126,7 @@ public class EDespatchSample {
     @Order(11)
     public void status() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.statusEDespathces(Token);
+        String status = adapter.statusEDespatch(Token);
         Assertions.assertNotNull(status);
         System.out.println(status);
 
@@ -134,11 +135,71 @@ public class EDespatchSample {
     @Order(12)
     public void statusOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.statusEDespathes_Outbox(Token);
+        String status = adapter.statusEDespatch_Outbox(Token);
         Assertions.assertNotNull(status);
         System.out.println(status);
 
 
+    }
+    @Test
+    @Order(13)
+    public void downloadXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(EDespatchList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(EDespatchList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadXMLEDespatch(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(14)
+    public void downloadHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(EDespatchList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(EDespatchList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadHTMLEDespatch(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(15)
+    public void downloadPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(EDespatchList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(EDespatchList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadPDFEDespatch(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(16)
+    public void downloadXMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(EDespatchOutbox.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(EDespatchOutbox.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadXMLEDespatch_Outbox(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(17)
+    public void downloadHTMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(EDespatchOutbox.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(EDespatchOutbox.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadHTMLEDespatch_Outbox(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(18)
+    public void downloadPDFOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(EDespatchOutbox.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(EDespatchOutbox.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadPDFEDespatch_Outbox(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
     }
 
 }

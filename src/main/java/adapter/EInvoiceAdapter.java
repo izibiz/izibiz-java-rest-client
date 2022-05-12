@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import com.google.gson.Gson;
 
+import model.DownloadRequest;
 import response.Content;
 import response.EInvoiceResponse;
 
@@ -21,7 +22,7 @@ public class EInvoiceAdapter extends Adapter {
     EInvoiceResponse eInvoiceResponseList_outbox;
     EInvoiceResponse eInvoiceResponse;
 
-    public EInvoiceResponse listEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse listEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"inbox?dateType=DELIVERY&status=New&startDate="+ adapter.startDate + "&endDate=" + adapter.endDate + "&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
         String response = httpClient().send(token, url);
@@ -29,7 +30,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponseList;
     }
 
-    public EInvoiceResponse pendingApprovalEinvoices(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse pendingApprovalEinvoice(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?page=0&sortProperty=customerName&sort=asc";
         String response = httpClient().send(token, url);
@@ -37,7 +38,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponse;
     }
 
-    public EInvoiceResponse approvalExpiredEInvoices(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse approvalExpiredEInvoice(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "inbox?status=ResponseTimeExpired&page=0&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -45,7 +46,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponse;
     }
 
-    public EInvoiceResponse UndeliverableAnswerEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse UndeliverableAnswerEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "inbox?status=ResponseUnDelivered&dateType=DELIVERY&startDate="+ adapter.startDate + "&endDate="+ adapter.endDate+ "&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -55,7 +56,7 @@ public class EInvoiceAdapter extends Adapter {
 
     }
 
-    public EInvoiceResponse RejectedEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse RejectedEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "inbox?status=Rejected&dateType=DELIVERY&startDate="+ adapter.startDate + "&endDate="+ adapter.endDate+ "&page=0&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -65,7 +66,7 @@ public class EInvoiceAdapter extends Adapter {
     }
 
     //public EInvoiceResponse StatusInquiryEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
-    public String StatusInquiryEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public String StatusInquiryEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String response="";
         for (Content content:eInvoiceResponseList.contents) {
@@ -76,7 +77,7 @@ public class EInvoiceAdapter extends Adapter {
 
     }
 
-    public String ViewPDFEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewPDFEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (Content content:eInvoiceResponseList.contents) {
@@ -88,7 +89,7 @@ public class EInvoiceAdapter extends Adapter {
         return response;
 
     }
-    public String ViewHTMLEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewHTMLEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (Content content:eInvoiceResponseList.contents) {
@@ -100,7 +101,7 @@ public class EInvoiceAdapter extends Adapter {
         return response;
 
     }
-    public String ViewXMLEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewXMLEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (Content content:eInvoiceResponseList.contents) {
@@ -112,7 +113,7 @@ public class EInvoiceAdapter extends Adapter {
         return response;
     }
 
-    public EInvoiceResponse listEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse listEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"outbox?dateType=DELIVERY&status=New&startDate="+ adapter.startDate + "&endDate=" + adapter.endDate + "&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
         String response = httpClient().send(token, url);
@@ -120,7 +121,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponseList_outbox;
     }
 
-    public EInvoiceResponse pendingApprovalEinvoices_Outbox(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse pendingApprovalEinvoice_Outbox(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=WaitingForResponse&page=0&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -129,7 +130,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponse;
     }
 
-    public EInvoiceResponse approvalExpiredEInvoices_Outbox(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse approvalExpiredEInvoice_Outbox(String token)throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=ResponseTimeExpired&page=0&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -137,7 +138,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponse;
     }
 
-    public EInvoiceResponse UndeliverableAnswerEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse UndeliverableAnswerEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=UnDelivered&dateType=DELIVERY&startDate="+adapter.startDate+"&endDate="+adapter.endDate+"&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -146,7 +147,7 @@ public class EInvoiceAdapter extends Adapter {
 
     }
 
-    public EInvoiceResponse RejectedEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EInvoiceResponse RejectedEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "outbox?status=Rejected&dateType=DELIVERY&startDate="+adapter.startDate+"&endDate="+adapter.endDate+"&page=0&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
@@ -154,7 +155,7 @@ public class EInvoiceAdapter extends Adapter {
         return eInvoiceResponse;
 
     }
-    public String ViewPDFEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewPDFEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (Content content:eInvoiceResponseList_outbox.contents) {
@@ -166,7 +167,7 @@ public class EInvoiceAdapter extends Adapter {
         return response;
 
     }
-    public String ViewHTMLEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewHTMLEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
         String response="";
         for (Content content:eInvoiceResponseList_outbox.contents) {
             File file = new File(PATH + "EInvoice/Outbox/HTML", content.id+".html");
@@ -180,7 +181,7 @@ public class EInvoiceAdapter extends Adapter {
 
 
     }
-    public String ViewXMLEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewXMLEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (Content content:eInvoiceResponseList_outbox.contents) {
@@ -193,18 +194,42 @@ public class EInvoiceAdapter extends Adapter {
 
     }
 
-    public String statusEInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public String statusEInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/inbox"+ "/lookup-statuses";
         String response = httpClient().send(token, url);
         return response;
     }
 
-    public String statusEInvoices_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public String statusEInvoice_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/outbox"+ "/lookup-statuses";
         String response = httpClient().send(token, url);
         return response;
+    }
+    public String downloadXMLEInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/inbox/download/ubl", "EInvoice/Inbox/XML/Downloads/");
+    }
+    public String downloadHTMLEInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/inbox/download/html", "EInvoice/Inbox/HTML/Downloads/");
+    }
+    public String downloadPDFEInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/inbox/download/pdf", "EInvoice/Inbox/PDF/Downloads/");
+    }
+    public String downloadXMLEInvoice_Outbox(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/outbox/download/ubl", "EInvoice/Outbox/XML/Downloads/");
+    }
+    public String downloadHTMLEInvoice_Outbox(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/outbox/download/html", "EInvoice/Outbox/HTML/Downloads/");
+    }
+    public String downloadPDFEInvoice_Outbox(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/outbox/download/pdf", "EInvoice/Outbox/PDF/Downloads/");
     }
 
 }

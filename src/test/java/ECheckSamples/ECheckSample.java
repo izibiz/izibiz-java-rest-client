@@ -3,6 +3,7 @@ package ECheckSamples;
 import adapter.AuthAdapter;
 import adapter.ECheckAdapter;
 import adapter.EExchangeAdapter;
+import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.ECheckResponse;
@@ -95,5 +96,35 @@ public class ECheckSample {
         Assertions.assertNotNull(status);
         System.out.println(status);
 
+    }
+    @Test
+    @Order(8)
+    public void downloadXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(ECheckList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(ECheckList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadXMLECheck(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(9)
+    public void downloadHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(ECheckList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(ECheckList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadHTMLECheck(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(10)
+    public void downloadPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(ECheckList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(ECheckList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadPDFECheck(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
     }
 }

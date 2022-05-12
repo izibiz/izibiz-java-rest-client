@@ -2,6 +2,7 @@ package ESmmSamples;
 import adapter.AuthAdapter;
 import adapter.EInvoiceAdapter;
 import adapter.ESmmAdapter;
+import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EInvoiceResponse;
@@ -95,6 +96,36 @@ public class ESmmSample {
         Assertions.assertNotNull(status);
         System.out.println(status);
 
+    }
+    @Test
+    @Order(8)
+    public void downloadXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(ESmmList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(ESmmList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadXMLESmm(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(9)
+    public void downloadHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(ESmmList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(ESmmList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadHTMLESmm(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
+    }
+    @Test
+    @Order(10)
+    public void downloadPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        DownloadRequest body1 = new DownloadRequest(String.valueOf(ESmmList.getContent()[0].getId()));
+        DownloadRequest body2 = new DownloadRequest(String.valueOf(ESmmList.getContent()[1].getId()));
+        DownloadRequest[] downloadRequests = new DownloadRequest[]{body1,body2};
+        String status = adapter.downloadPDFESmm(Token, downloadRequests);
+        Assertions.assertNotNull(status);
+        System.out.println(status);
     }
 
 

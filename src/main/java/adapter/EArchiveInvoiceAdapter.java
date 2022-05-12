@@ -2,6 +2,7 @@ package adapter;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
+import model.DownloadRequest;
 import response.Content;
 import response.ContentEArchiveInvoice;
 import response.EArchiveInvoiceResponse;
@@ -21,16 +22,16 @@ public class EArchiveInvoiceAdapter extends Adapter {
     EArchiveInvoiceResponse EArchiveInvoiceResponse;
     EArchiveInvoiceResponse eArchiveInvoiceResponseList;
 
-    public EArchiveInvoiceResponse listEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EArchiveInvoiceResponse listEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL;
         String response = httpClient().send(token, url);
         eArchiveInvoiceResponseList = new Gson().fromJson(response, EArchiveInvoiceResponse.class);
 
-        return EArchiveInvoiceResponse;
+        return eArchiveInvoiceResponseList;
     }
 
-    public String ViewPDFEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewPDFEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
 
         String response="";
@@ -43,7 +44,7 @@ public class EArchiveInvoiceAdapter extends Adapter {
         return response;
 
     }
-    public String ViewHTMLEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewHTMLEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (ContentEArchiveInvoice content:eArchiveInvoiceResponseList.contents) {
@@ -55,7 +56,7 @@ public class EArchiveInvoiceAdapter extends Adapter {
         return response;
 
     }
-    public String ViewXMLEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewXMLEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String response="";
         for (ContentEArchiveInvoice content:eArchiveInvoiceResponseList.contents) {
@@ -68,10 +69,22 @@ public class EArchiveInvoiceAdapter extends Adapter {
 
 
     }
-    public String statusEArchiveInvoices(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public String statusEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/lookup-statuses";
         String response = httpClient().send(token, url);
         return response;
+    }
+    public String downloadXMLEArchiveInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/ubl", "EArchiveInvoice/XML/Downloads/");
+    }
+    public String downloadHTMLEArchiveInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/html", "EArchiveInvoice/HTML/Downloads/");
+    }
+    public String downloadPDFEArchiveInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/pdf", "EArchiveInvoice/PDF/Downloads/");
     }
 }

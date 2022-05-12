@@ -1,6 +1,7 @@
 package adapter;
 
 import com.google.gson.Gson;
+import model.DownloadRequest;
 import response.Content;
 import response.ContentESmm;
 import response.EInvoiceResponse;
@@ -72,5 +73,17 @@ public class ESmmAdapter extends Adapter {
         String url = URL +"/lookup-statuses";
         String response = httpClient().send(token, url);
         return response;
+    }
+    public String downloadXMLESmm(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/ubl", "ESmm/XML/Downloads/");
+    }
+    public String downloadHTMLESmm(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/html", "ESmm/HTML/Downloads/");
+    }
+    public String downloadPDFESmm(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/pdf", "ESmm/PDF/Downloads/");
     }
 }

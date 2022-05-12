@@ -1,6 +1,7 @@
 package adapter;
 
 import com.google.gson.Gson;
+import model.DownloadRequest;
 import response.ContentECreditNote;
 import response.ContentESmm;
 import response.ECreditNoteResponse;
@@ -70,5 +71,17 @@ public class ECreditNoteAdapter extends Adapter {
         String url = URL +"/lookup-statuses";
         String response = httpClient().send(token, url);
         return response;
+    }
+    public String downloadXMLECreditNote(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/ubl", "ECreditNote/XML/Downloads/");
+    }
+    public String downloadHTMLECreditNote(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/html", "ECreditNote/HTML/Downloads/");
+    }
+    public String downloadPDFECreditNote(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/pdf", "ECreditNote/PDF/Downloads/");
     }
 }

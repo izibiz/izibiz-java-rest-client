@@ -75,24 +75,15 @@ public class EExchangeAdapter extends Adapter {
     }
 
     public String downloadXMLEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
-        String url = URL +"/download/ubl";
-        String path = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/EExchange/XML/Downloads/";
 
-        String response = httpClient().sendDownload(token, url, body,path);
-        return response;
+        return downloadDocument(token, body, URL+"/download/ubl", "EExchange/XML/Downloads/");
     }
     public String downloadHTMLEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
-        String url = URL +"/download/html";
-        String path = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/EExchange/HTML/Downloads/";
 
-        String response = httpClient().sendDownload(token, url, body,path);
-        return response;
+        return downloadDocument(token, body, URL+"/download/html", "EExchange/HTML/Downloads/");
     }
     public String downloadPDFEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
-        String url = URL +"/download/pdf";
-        String path = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/EExchange/PDF/Downloads/";
 
-        String response = httpClient().sendDownload(token, url, body,path);
-        return response;
+        return downloadDocument(token, body, URL+"/download/pdf", "EExchange/PDF/Downloads/");
     }
 }

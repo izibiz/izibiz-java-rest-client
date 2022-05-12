@@ -1,6 +1,7 @@
 package adapter;
 
 import com.google.gson.Gson;
+import model.DownloadRequest;
 import response.ContentECheck;
 
 import response.ECheckResponse;
@@ -72,5 +73,17 @@ public class ECheckAdapter extends Adapter {
         String url = URL +"/lookup-statuses";
         String response = httpClient().send(token, url);
         return response;
+    }
+    public String downloadXMLECheck(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/ubl", "ECheck/XML/Downloads/");
+    }
+    public String downloadHTMLECheck(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/html", "ECheck/HTML/Downloads/");
+    }
+    public String downloadPDFECheck(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        return downloadDocument(token, body, URL+"/download/pdf", "ECheck/PDF/Downloads/");
     }
 }
