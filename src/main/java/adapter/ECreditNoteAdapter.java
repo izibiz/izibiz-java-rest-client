@@ -21,14 +21,14 @@ public class ECreditNoteAdapter extends Adapter {
 
         String url = URL;
         String response = httpClient().send(token, url);
-        eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);//java generic method
+        eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);
         return eCreditNoteResponseList;
     }
     public ECreditNoteResponse listByCreationDateECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
-        eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);//java generic method
+        eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);
         return eCreditNoteResponseList;
     }
     public String ViewPDFECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {

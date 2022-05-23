@@ -22,14 +22,14 @@ public class EDeclarationAdapter extends Adapter {
 
         String url = URL;
         String response = httpClient().send(token, url);
-        eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);//java generic method
+        eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);
         return eDeclarationResponseList;
     }
     public EDeclarationResponse listByCreationDateEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
-        eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);//java generic method
+        eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);
         return eDeclarationResponseList;
     }
 

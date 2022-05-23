@@ -21,14 +21,14 @@ public class EExchangeAdapter extends Adapter {
 
         String url = URL;
         String response = httpClient().send(token, url);
-        eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);//java generic method
+        eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);
         return eExchangeResponseList;
     }
     public EExchangeResponse listByCreationDateEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
         String response = httpClient().send(token, url);
-        eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);//java generic method
+        eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);
         return eExchangeResponseList;
     }
 

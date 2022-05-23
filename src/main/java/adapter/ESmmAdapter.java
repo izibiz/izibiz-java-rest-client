@@ -2,9 +2,9 @@ package adapter;
 
 import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.Content;
+
 import response.ContentESmm;
-import response.EInvoiceResponse;
+
 import response.ESmmResponse;
 
 import java.io.File;
@@ -22,14 +22,14 @@ public class ESmmAdapter extends Adapter {
 
         String url = URL;
         String response = httpClient().send(token, url);
-        eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);//java generic method
+        eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);
         return eSmmResponseList;
     }
     public ESmmResponse listByCreationDateESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
-        eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);//java generic method
+        eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);
         return eSmmResponseList;
     }
 

@@ -26,7 +26,7 @@ public class EInvoiceAdapter extends Adapter {
 
         String url = URL +"inbox?dateType=DELIVERY&status=New&startDate="+ adapter.startDate + "&endDate=" + adapter.endDate + "&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
         String response = httpClient().send(token, url);
-        eInvoiceResponseList = new Gson().fromJson(response,EInvoiceResponse.class);//java generic method
+        eInvoiceResponseList = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponseList;
     }
 
@@ -117,7 +117,7 @@ public class EInvoiceAdapter extends Adapter {
 
         String url = URL +"outbox?dateType=DELIVERY&status=New&startDate="+ adapter.startDate + "&endDate=" + adapter.endDate + "&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
         String response = httpClient().send(token, url);
-        eInvoiceResponseList_outbox = new Gson().fromJson(response,EInvoiceResponse.class);//java generic method
+        eInvoiceResponseList_outbox = new Gson().fromJson(response,EInvoiceResponse.class);
         return eInvoiceResponseList_outbox;
     }
 

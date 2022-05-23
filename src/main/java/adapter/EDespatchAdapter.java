@@ -28,7 +28,7 @@ public class EDespatchAdapter extends Adapter {
 
         String url = URL ;
         String response = httpClient().send(token, url);
-        eDespatchResponseList = new Gson().fromJson(response, EDespatchResponse.class);//java generic method
+        eDespatchResponseList = new Gson().fromJson(response, EDespatchResponse.class);
         return eDespatchResponseList;
     }
 
@@ -81,7 +81,7 @@ public class EDespatchAdapter extends Adapter {
 
         String url = URL + "outbox?status=WaitingForResponse&page=0&pageSize=100&sortProperty=createDate&sort=asc" ;
         String response = httpClient().send(token, url);
-        eDespatchResponseList_outbox = new Gson().fromJson(response, EDespatchResponse.class);//java generic method
+        eDespatchResponseList_outbox = new Gson().fromJson(response, EDespatchResponse.class);
         return eDespatchResponseList_outbox;
     }
     public String ViewPDFEDespatch_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {

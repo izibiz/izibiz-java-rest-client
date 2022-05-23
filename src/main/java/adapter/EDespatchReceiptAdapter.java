@@ -22,7 +22,7 @@ public class EDespatchReceiptAdapter extends Adapter{
 
         String url = URL +"inbox?dateType=DELIVERY&&status=New&startDate=" + adapter.startDate +"&endDate="+ adapter.endDate +"&page=1&pageSize=20&sort=desc&sortProperty=supplierName";
         String response = httpClient().send(token, url);
-        eDespatchReceiptResponseList = new Gson().fromJson(response, EDespatchReceiptResponse.class);//java generic method
+        eDespatchReceiptResponseList = new Gson().fromJson(response, EDespatchReceiptResponse.class);
         return eDespatchReceiptResponseList;
     }
 
@@ -76,7 +76,7 @@ public class EDespatchReceiptAdapter extends Adapter{
 
         String url = URL +"outbox?status=WaitingForResponse&page=0&pageSize=100&sortProperty=createDate&sort=asc";
         String response = httpClient().send(token, url);
-        eDespatchReceiptResponseList_outbox = new Gson().fromJson(response, EDespatchReceiptResponse.class);//java generic method
+        eDespatchReceiptResponseList_outbox = new Gson().fromJson(response, EDespatchReceiptResponse.class);
         return eDespatchReceiptResponseList_outbox;
     }
 

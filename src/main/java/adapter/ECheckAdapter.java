@@ -22,14 +22,14 @@ public class ECheckAdapter extends Adapter {
 
         String url = URL;
         String response = httpClient().send(token, url);
-        eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);//java generic method
+        eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);
         return eCheckResponseList;
     }
     public ECheckResponse listByCreationDateECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
         String response = httpClient().send(token, url);
-        eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);//java generic method
+        eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);
         return eCheckResponseList;
     }
 
