@@ -2,19 +2,15 @@ package EExchangeSamples;
 
 import adapter.AuthAdapter;
 import adapter.EExchangeAdapter;
-
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EExchangeResponse;
-
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EExchangeSample {
     static EExchangeAdapter adapter;
-    static EExchangeResponse EExchange;
     static EExchangeResponse EExchangeList;
     static EExchangeResponse EExchangeList2;
     static adapter.AuthAdapter AuthAdapter;
@@ -24,10 +20,8 @@ public class EExchangeSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new EExchangeAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
     @Test
     @Order(1)

@@ -10,7 +10,7 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
+
 
 public class AuthAdapter extends Adapter{
     public static final String URL = BASE_URL + "/" + VERSION + "/auth/token";

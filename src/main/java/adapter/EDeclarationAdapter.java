@@ -3,10 +3,7 @@ package adapter;
 import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.ContentEDeclaration;
-import response.ContentEExchange;
 import response.EDeclarationResponse;
-import response.EExchangeResponse;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;

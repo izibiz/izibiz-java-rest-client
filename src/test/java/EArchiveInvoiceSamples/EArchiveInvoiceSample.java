@@ -2,21 +2,18 @@ package EArchiveInvoiceSamples;
 
 import adapter.AuthAdapter;
 import adapter.EArchiveInvoiceAdapter;
-import adapter.EInvoiceAdapter;
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EArchiveInvoiceResponse;
-import response.EInvoiceResponse;
+
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EArchiveInvoiceSample {
     static EArchiveInvoiceAdapter adapter;
-    static EArchiveInvoiceResponse EArchiveInvoice;
     static EArchiveInvoiceResponse EArchiveInvoiceList;
-    static EArchiveInvoiceResponse EArchiveInvoiceOutbox;
     static adapter.AuthAdapter AuthAdapter;
 
     static String Token ;
@@ -24,10 +21,8 @@ public class EArchiveInvoiceSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new EArchiveInvoiceAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
 
     @Test

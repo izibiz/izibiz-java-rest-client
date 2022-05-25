@@ -6,8 +6,6 @@ import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EInvoiceResponse;
-import sample.auth.AuthSample;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -23,10 +21,8 @@ public class EInvoiceSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new EInvoiceAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
 
 

@@ -1,20 +1,15 @@
 package ESmmSamples;
 import adapter.AuthAdapter;
-import adapter.EInvoiceAdapter;
 import adapter.ESmmAdapter;
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
-import response.EInvoiceResponse;
 import response.ESmmResponse;
-import sample.auth.AuthSample;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ESmmSample {
     static ESmmAdapter adapter;
-    static ESmmResponse ESmm;
     static ESmmResponse ESmmList;
     static ESmmResponse ESmmList2;
     static AuthAdapter AuthAdapter;
@@ -24,10 +19,8 @@ public class ESmmSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new ESmmAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
     @Test
     @Order(1)

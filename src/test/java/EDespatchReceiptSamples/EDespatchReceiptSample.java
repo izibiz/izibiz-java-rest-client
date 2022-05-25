@@ -6,13 +6,11 @@ import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EDespatchReceiptResponse;
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EDespatchReceiptSample {
     static EDespatchReceiptAdapter adapter;
-    static EDespatchReceiptResponse EDespatchReceipt;
     static EDespatchReceiptResponse EDespatchReceiptList;
     static EDespatchReceiptResponse EDespatchReceiptOutbox;
     static adapter.AuthAdapter AuthAdapter;
@@ -22,10 +20,8 @@ public class EDespatchReceiptSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new EDespatchReceiptAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
 
 

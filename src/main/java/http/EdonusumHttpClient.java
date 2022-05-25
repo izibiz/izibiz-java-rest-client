@@ -15,7 +15,6 @@ import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 public class EdonusumHttpClient {
@@ -40,7 +39,6 @@ public class EdonusumHttpClient {
             if(null == bodyObj) {
                 bodyObj = mapper.readTree(resp.body()).get("error");
             }
-
             response = bodyObj.toString();
 
             if(StringUtils.isEmpty(response)) {
@@ -49,8 +47,6 @@ public class EdonusumHttpClient {
         } catch (URISyntaxException e){
             e.printStackTrace();
         }
-
-
         return response;
     }
     public String sendDownload(String token, String url, DownloadRequest[] body, String path) throws IOException, InterruptedException {
@@ -67,11 +63,7 @@ public class EdonusumHttpClient {
                     .setHeader("Content-Type","application/json ")
                     .POST(HttpRequest.BodyPublishers.ofString(bodyJson))
                     .build();
-
-
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-
             JsonNode bodyObj1 = mapper.readTree(resp.body()).get("error");
             bodyObj = mapper.readTree(resp.body()).get("data");
 
@@ -112,7 +104,6 @@ public class EdonusumHttpClient {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
-
         return resp.body().toString();
     }
 

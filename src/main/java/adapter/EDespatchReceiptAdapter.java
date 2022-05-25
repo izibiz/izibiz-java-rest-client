@@ -1,15 +1,11 @@
 package adapter;
-import com.fasterxml.jackson.databind.JsonNode;
+
 import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.*;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.http.HttpRequest;
 
 public class EDespatchReceiptAdapter extends Adapter{
     public String URL = BASE_URL + "/" + VERSION + "/edespatch-responses/" ;

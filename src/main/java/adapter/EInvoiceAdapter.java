@@ -1,18 +1,11 @@
 package adapter;
 
-import com.fasterxml.jackson.databind.JsonNode;
-
 import com.google.gson.Gson;
-
 import model.DownloadRequest;
 import response.Content;
 import response.EInvoiceResponse;
-
-
 import java.io.File;
-
 import java.io.IOException;
-
 import java.net.URISyntaxException;
 
 public class EInvoiceAdapter extends Adapter {

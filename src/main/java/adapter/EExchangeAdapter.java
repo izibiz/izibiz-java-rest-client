@@ -2,9 +2,7 @@ package adapter;
 
 import com.google.gson.Gson;
 import model.DownloadRequest;
-import model.LoginRequest;
 import response.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;

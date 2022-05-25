@@ -1,19 +1,13 @@
 package adapter;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.Content;
 import response.ContentEDespatch;
 import response.EDespatchResponse;
-import response.EInvoiceResponse;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.http.HttpRequest;
+
 
 
 

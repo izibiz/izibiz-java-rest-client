@@ -2,19 +2,16 @@ package ECreditNoteSamples;
 
 import adapter.AuthAdapter;
 import adapter.ECreditNoteAdapter;
-import adapter.ESmmAdapter;
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.ECreditNoteResponse;
-import response.ESmmResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ECreditNoteSample {
     static ECreditNoteAdapter adapter;
-    static ECreditNoteResponse ECreditNote;
     static ECreditNoteResponse ECreditNoteList;
     static ECreditNoteResponse ECreditNoteList2;
     static AuthAdapter AuthAdapter;
@@ -24,10 +21,8 @@ public class ECreditNoteSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new ECreditNoteAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
     @Test
     @Order(1)

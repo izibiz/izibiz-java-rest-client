@@ -2,19 +2,15 @@ package EDeclarationSamples;
 
 import adapter.AuthAdapter;
 import adapter.EDeclarationAdapter;
-
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.EDeclarationResponse;
-
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EDeclarationSample {
     static EDeclarationAdapter adapter;
-    static EDeclarationResponse EDeclaration;
     static EDeclarationResponse EDeclarationList;
     static EDeclarationResponse EDeclarationList2;
     static adapter.AuthAdapter AuthAdapter;
@@ -24,10 +20,8 @@ public class EDeclarationSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new EDeclarationAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
     @Test
     @Order(1)

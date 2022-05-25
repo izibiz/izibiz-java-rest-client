@@ -2,19 +2,15 @@ package ECheckSamples;
 
 import adapter.AuthAdapter;
 import adapter.ECheckAdapter;
-import adapter.EExchangeAdapter;
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
 import response.ECheckResponse;
-
-
 import java.io.IOException;
 import java.net.URISyntaxException;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ECheckSample {
     static ECheckAdapter adapter;
-    static ECheckResponse ECheck;
     static ECheckResponse ECheckList;
     static ECheckResponse ECheckList2;
     static adapter.AuthAdapter AuthAdapter;
@@ -24,10 +20,8 @@ public class ECheckSample {
 
     @BeforeAll
     public static void init() {
-        //     AuthSample authSample= new AuthSample();
         adapter = new ECheckAdapter();
         AuthAdapter = new AuthAdapter();
-        //     Token = AuthSample.response;
     }
     @Test
     @Order(1)

@@ -2,11 +2,8 @@ package adapter;
 
 import com.google.gson.Gson;
 import model.DownloadRequest;
-
 import response.ContentESmm;
-
 import response.ESmmResponse;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
