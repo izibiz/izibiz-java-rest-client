@@ -6,9 +6,9 @@ import response.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-
-public class EArchiveInvoiceGibIvdAdapter extends Adapter {
+public class EArchiveInvoiceGibIvdAdapter extends DocumentAdapter<EArchiveInvoiceGibIvdResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/earchives-gib-ivd" ;
     Adapter adapter = new Adapter();
     EArchiveInvoiceGibIvdResponse eArchiveInvoiceGibIvdResponse;
@@ -16,21 +16,16 @@ public class EArchiveInvoiceGibIvdAdapter extends Adapter {
     EArchiveInvoiceGibIvdResponse eArchiveInvoiceGibIvdResponseOutbox;
     EArchiveInvoiceGibIvdResponse eArchiveInvoiceGibIvdListOutbox;
 
-    public EArchiveInvoiceGibIvdResponse listEArchiveEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EArchiveInvoiceGibIvdResponse listEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/inbox";
-        String response = httpClient().send(token, url);
-        eArchiveInvoiceGibIvdResponse = new Gson().fromJson(response, EArchiveInvoiceGibIvdResponse.class);
-
-        return eArchiveInvoiceGibIvdResponse;
+        return list(token, url, EArchiveInvoiceGibIvdResponse.class);
     }
 
     public EArchiveInvoiceGibIvdResponse listByCreationDateEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/inbox?page=0&pageSize=20&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url);
-        eArchiveInvoiceGibIvdList = new Gson().fromJson(response, EArchiveInvoiceGibIvdResponse.class);//java generic method
-        return eArchiveInvoiceGibIvdList;
+        return list(token, url, EArchiveInvoiceGibIvdResponse.class);
     }
 
     public EArchiveInvoiceGibIvdResponse listEArchiveInvoiceGibIvd_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
@@ -49,85 +44,35 @@ public class EArchiveInvoiceGibIvdAdapter extends Adapter {
         eArchiveInvoiceGibIvdListOutbox = new Gson().fromJson(response, EArchiveInvoiceGibIvdResponse.class);//java generic method
         return eArchiveInvoiceGibIvdListOutbox;
     }
-    public String ViewPDFEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewPDFEArchiveInvoiceGibIvd(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoiceGibIvd content:eArchiveInvoiceGibIvdResponse.contents) {
-            File file = new File(PATH + "EArchiveInvoiceGibIvd/Inbox/PDF", content.id+".pdf");
-            String url = URL + "inbox/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EArchiveInvoiceGibIvd","inbox" );
     }
-    public String ViewHTMLEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewHTMLEArchiveInvoiceGibIvd(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoiceGibIvd content:eArchiveInvoiceGibIvdResponse.contents) {
-            File file = new File(PATH + "EArchiveInvoiceGibIvd/Inbox/HTML", content.id+".html");
-            String url = URL + "inbox/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "EArchiveInvoiceGibIvd","inbox" );
     }
-    public String ViewXMLEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEArchiveInvoiceGibIvd(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoiceGibIvd content:eArchiveInvoiceGibIvdResponse.contents) {
-            File file = new File(PATH + "EArchiveInvoiceGibIvd/Inbox/XML", content.id+".xml");
-            String url = URL + "inbox/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "EArchiveInvoiceGibIvd","inbox" );
     }
-    public String ViewPDFEArchiveInvoiceGibIvd_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFEArchiveInvoiceGibIvd_outbox(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoiceGibIvd content:eArchiveInvoiceGibIvdResponseOutbox.contents) {
-            File file = new File(PATH + "EArchiveInvoiceGibIvd/Outbox/PDF", content.id+".pdf");
-            String url = URL + "outbox/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EArchiveInvoiceGibIvd", "outbox" );
     }
-    public String ViewHTMLEArchiveInvoiceGibIvd_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
-        String response="";
-        for (ContentEArchiveInvoiceGibIvd content:eArchiveInvoiceGibIvdResponseOutbox.contents) {
-            File file = new File(PATH + "EArchiveInvoiceGibIvd/Outbox/HTML", content.id+".html");
-            String url = URL + "outbox/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
+    public String viewHTMLEArchiveInvoiceGibIvd_outbox(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return response;
-
-
-
-
+        return view(token, URL, idList, "html", "HTML", "EArchiveInvoiceGibIvd","outbox" );
     }
-    public String ViewXMLEArchiveInvoiceGibIvd_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEArchiveInvoiceGibIvd_outbox(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoiceGibIvd content:eArchiveInvoiceGibIvdResponseOutbox.contents) {
-            File file = new File(PATH + "EArchiveInvoiceGibIvd/Outbox/XML", content.id+".xml");
-            String url = URL + "outbox/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "ubl", "XML", "EArchiveInvoiceGibIvd","outbox" );
     }
 
     public String statusEArchiveInvoiceGibIvd(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL +"/inbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        String url = URL +"/lookup-statuses";
+        return listStatus(token, url);
     }
 
     public String downloadXMLEArchiveInvoiceGibIvd(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{

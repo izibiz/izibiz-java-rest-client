@@ -3,12 +3,15 @@ package adapter;
 import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.ContentECreditNote;
+import response.EArchiveInvoiceGibIvdResponse;
+import response.ECheckResponse;
 import response.ECreditNoteResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-public class ECreditNoteAdapter extends Adapter {
+public class ECreditNoteAdapter extends DocumentAdapter<ECreditNoteResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/ecreditnotes" ;
     Adapter adapter = new Adapter();
     ECreditNoteResponse eCreditNoteResponseList;
@@ -16,58 +19,29 @@ public class ECreditNoteAdapter extends Adapter {
     ECreditNoteResponse eCreditNoteResponse;
     public ECreditNoteResponse listECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL;
-        String response = httpClient().send(token, url);
-        eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);
-        return eCreditNoteResponseList;
+        return list(token, URL, ECreditNoteResponse.class);
     }
     public ECreditNoteResponse listByCreationDateECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url);
-        eCreditNoteResponseList = new Gson().fromJson(response, ECreditNoteResponse.class);
-        return eCreditNoteResponseList;
+        return list(token, url, ECreditNoteResponse.class);
     }
-    public String ViewPDFECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFECreditNote(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentECreditNote content:eCreditNoteResponseList.contents) {
-            File file = new File(PATH + "ECreditNote/PDF", content.id+".pdf");
-            String url = URL + "/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "ECreditNote","" );
     }
-    public String ViewHTMLECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLECreditNote(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentECreditNote content:eCreditNoteResponseList.contents) {
-            File file = new File(PATH + "ECreditNote/HTML", content.id+".html");
-            String url = URL + "/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "ECreditNote","" );
     }
-    public String ViewXMLECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLECreditNote(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentECreditNote content:eCreditNoteResponseList.contents) {
-            File file = new File(PATH + "ECreditNote/XML", content.id+".xml");
-            String url = URL + "/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "ECreditNote","" );
     }
     public String statusECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
     public String downloadXMLECreditNote(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

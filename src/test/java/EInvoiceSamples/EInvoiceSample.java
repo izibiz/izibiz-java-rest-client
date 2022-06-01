@@ -8,6 +8,9 @@ import org.junit.jupiter.api.*;
 import response.EInvoiceResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EInvoiceSample {
     static EInvoiceAdapter adapter;
@@ -101,7 +104,7 @@ public class EInvoiceSample {
     @Order(8)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEInvoice(Token);
+        String xml = adapter.viewXMLEInvoice(Token, List.of(EInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -111,7 +114,7 @@ public class EInvoiceSample {
     @Order(9)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEInvoice(Token);
+        String html = adapter.viewHTMLEInvoice(Token, List.of(EInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -121,7 +124,7 @@ public class EInvoiceSample {
     @Order(10)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEInvoice(Token);
+        String pdf = adapter.viewPDFEInvoice(Token, List.of(EInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -188,7 +191,7 @@ public class EInvoiceSample {
     @Order(17)
     public void viewHTMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEInvoice_Outbox(Token);
+        String html = adapter.viewHTMLEInvoice_outbox(Token, List.of(EInvoiceOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -197,7 +200,7 @@ public class EInvoiceSample {
     @Order(18)
     public void viewPDFOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEInvoice_Outbox(Token);
+        String pdf = adapter.viewPDFEInvoice_outbox(Token, List.of(EInvoiceOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -206,7 +209,7 @@ public class EInvoiceSample {
     @Order(19)
     public void viewXMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEInvoice_Outbox(Token);
+        String xml = adapter.viewXMLEInvoice_outbox(Token, List.of(EInvoiceOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -215,7 +218,7 @@ public class EInvoiceSample {
     @Order(20)
     public void statusOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.statusEInvoice(Token);
+        String status = adapter.statusEInvoice_Outbox(Token);
         Assertions.assertNotNull(status);
         System.out.println(status);
 

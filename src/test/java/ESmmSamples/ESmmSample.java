@@ -7,6 +7,9 @@ import org.junit.jupiter.api.*;
 import response.ESmmResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ESmmSample {
     static ESmmAdapter adapter;
@@ -56,7 +59,7 @@ public class ESmmSample {
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLESmm(Token);
+        String xml = adapter.viewXMLESmm(Token, List.of(ESmmList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -66,7 +69,7 @@ public class ESmmSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLESmm(Token);
+        String html = adapter.viewHTMLESmm(Token, List.of(ESmmList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -76,7 +79,7 @@ public class ESmmSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFESmm(Token);
+        String pdf = adapter.viewPDFESmm(Token, List.of(ESmmList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 

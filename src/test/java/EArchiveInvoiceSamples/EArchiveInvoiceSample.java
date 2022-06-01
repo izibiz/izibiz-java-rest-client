@@ -10,6 +10,9 @@ import response.EArchiveInvoiceResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EArchiveInvoiceSample {
     static EArchiveInvoiceAdapter adapter;
@@ -50,7 +53,7 @@ public class EArchiveInvoiceSample {
     @Order(3)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEArchiveInvoice(Token);
+        String xml = adapter.viewXMLEArchiveInvoice(Token, List.of(EArchiveInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -60,7 +63,7 @@ public class EArchiveInvoiceSample {
     @Order(4)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEArchiveInvoice(Token);
+        String html = adapter.ViewHTMLEArchiveInvoice(Token, List.of(EArchiveInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -70,7 +73,7 @@ public class EArchiveInvoiceSample {
     @Order(5)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEArchiveInvoice(Token);
+        String pdf = adapter.ViewPDFEArchiveInvoice(Token, List.of(EArchiveInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 

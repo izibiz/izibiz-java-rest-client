@@ -9,6 +9,9 @@ import response.ECreditNoteResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class ECreditNoteSample {
     static ECreditNoteAdapter adapter;
@@ -56,7 +59,7 @@ public class ECreditNoteSample {
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLECreditNote(Token);
+        String xml = adapter.viewXMLECreditNote(Token, List.of(ECreditNoteList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -66,7 +69,7 @@ public class ECreditNoteSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLECreditNote(Token);
+        String html = adapter.viewHTMLECreditNote(Token, List.of(ECreditNoteList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -76,7 +79,7 @@ public class ECreditNoteSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFECreditNote(Token);
+        String pdf = adapter.viewPDFECreditNote(Token, List.of(ECreditNoteList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 

@@ -7,69 +7,39 @@ import response.ECheckResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-public class ECheckAdapter extends Adapter {
+public class ECheckAdapter extends DocumentAdapter<ECheckResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/echecks" ;
-    Adapter adapter = new Adapter();
-    ECheckResponse eCheckResponseList;
-    ECheckResponse eCheckResponseList2;
-    ECheckResponse eCheckResponse;
+
 
     public ECheckResponse listECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL;
-        String response = httpClient().send(token, url);
-        eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);
-        return eCheckResponseList;
+       return list(token, URL, ECheckResponse.class);
     }
     public ECheckResponse listByCreationDateECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
-        String response = httpClient().send(token, url);
-        eCheckResponseList = new Gson().fromJson(response, ECheckResponse.class);
-        return eCheckResponseList;
+
+        return list(token, url, ECheckResponse.class);
     }
 
-    public String ViewPDFECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFECheck(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentECheck content:eCheckResponseList.contents) {
-            File file = new File(PATH + "ECheck/PDF", content.id+".pdf");
-            String url = URL + "/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "ECheck","" );
     }
-    public String ViewHTMLECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLECheck(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentECheck content:eCheckResponseList.contents) {
-            File file = new File(PATH + "ECheck/HTML", content.id+".html");
-            String url = URL + "/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "ECheck","" );
     }
-    public String ViewXMLECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLECheck(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentECheck content:eCheckResponseList.contents) {
-            File file = new File(PATH + "ECheck/XML", content.id+".xml");
-            String url = URL + "/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "ECheck","" );
     }
     public String statusECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
     public String downloadXMLECheck(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

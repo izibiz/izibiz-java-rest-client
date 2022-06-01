@@ -32,11 +32,7 @@ public class Adapter {
         mapper = new ObjectMapper();
     }
 
-    public String downloadDocument(String token, DownloadRequest[] body, String URL, String path) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
-        String filePath = System.getProperty("user.home")+"/Desktop/İzibiz/Kayit/" + path;
-        String response = httpClient().sendDownload(token, URL, body, filePath);
-        return response;
-    }
+
     public ObjectMapper mapper() {
         return this.mapper;
     }

@@ -3,15 +3,15 @@ package adapter;
 import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.ContentEDespatch;
+import response.EDeclarationResponse;
 import response.EDespatchResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 
-
-
-public class EDespatchAdapter extends Adapter {
+public class EDespatchAdapter extends DocumentAdapter<EDespatchResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/edespatches/" ;
     Adapter adapter = new Adapter();
     EDespatchResponse eDespatchResponse;
@@ -20,10 +20,7 @@ public class EDespatchAdapter extends Adapter {
 
     public EDespatchResponse listEDespatch(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL ;
-        String response = httpClient().send(token, url);
-        eDespatchResponseList = new Gson().fromJson(response, EDespatchResponse.class);
-        return eDespatchResponseList;
+        return list(token, URL, EDespatchResponse.class);
     }
 
     public String StatusInquiryEDespatch(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
@@ -36,40 +33,17 @@ public class EDespatchAdapter extends Adapter {
         return response;
     }
 
-    public String ViewPDFEDespatch(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFEDespatch(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDespatch content:eDespatchResponseList.contents) {
-            File file = new File(PATH + "EDespatch/Inbox/PDF", content.id+".pdf");
-            String url = URL + "inbox/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EDespatch","inbox" );
     }
-    public String ViewHTMLEDespatch(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLEDespatch(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDespatch content:eDespatchResponseList.contents) {
-            File file = new File(PATH + "EDespatch/Inbox/HTML", content.id+".html");
-            String url = URL + "inbox/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "EDespatch","inbox" );
     }
-    public String ViewXMLEDespatch(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEDespatch(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDespatch content:eDespatchResponseList.contents) {
-            File file = new File(PATH + "EDespatch/Inbox/XML", content.id+".xml");
-            String url = URL + "inbox/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "EDespatch","inbox" );
     }
     public EDespatchResponse listEDespatch_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
@@ -78,54 +52,28 @@ public class EDespatchAdapter extends Adapter {
         eDespatchResponseList_outbox = new Gson().fromJson(response, EDespatchResponse.class);
         return eDespatchResponseList_outbox;
     }
-    public String ViewPDFEDespatch_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFEDespatch_outbox(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDespatch content:eDespatchResponseList.contents) {
-            File file = new File(PATH + "EDespatch/Inbox/PDF", content.id+".pdf");
-            String url = URL + "outbox/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EDespatch","outbox" );
     }
-    public String ViewHTMLEDespatch_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLEDespatch_outbox(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDespatch content:eDespatchResponseList.contents) {
-            File file = new File(PATH + "EDespatch/Inbox/HTML", content.id+".html");
-            String url = URL + "outbox/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "EDespatch","outbox" );
     }
-    public String ViewXMLEDespatch_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEDespatch_outbox(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDespatch content:eDespatchResponseList.contents) {
-            File file = new File(PATH + "EDespatch/Inbox/XML", content.id+".xml");
-            String url = URL + "outbox/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "EDespatch","outbox" );
     }
-
     public String statusEDespatch(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/inbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
 
     public String statusEDespatch_Outbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/outbox"+ "/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
     public String downloadXMLEDespatch(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

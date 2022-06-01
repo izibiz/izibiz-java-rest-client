@@ -3,12 +3,14 @@ package adapter;
 import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.ContentEDeclaration;
+import response.ECreditNoteResponse;
 import response.EDeclarationResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-public class EDeclarationAdapter extends Adapter {
+public class EDeclarationAdapter extends DocumentAdapter<EDeclarationResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/edeclarations" ;
     Adapter adapter = new Adapter();
     EDeclarationResponse eDeclarationResponseList;
@@ -17,59 +19,30 @@ public class EDeclarationAdapter extends Adapter {
 
     public EDeclarationResponse listEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL;
-        String response = httpClient().send(token, url);
-        eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);
-        return eDeclarationResponseList;
+        return list(token, URL, EDeclarationResponse.class);
     }
     public EDeclarationResponse listByCreationDateEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=asc";
-        String response = httpClient().send(token, url);
-        eDeclarationResponseList = new Gson().fromJson(response, EDeclarationResponse.class);
-        return eDeclarationResponseList;
+        return list(token, url, EDeclarationResponse.class);
     }
 
-    public String ViewPDFEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFEDeclaration(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDeclaration content:eDeclarationResponseList.contents) {
-            File file = new File(PATH + "EDeclaration/PDF", content.id+".pdf");
-            String url = URL + "/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EDeclaration","" );
     }
-    public String ViewHTMLEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLEDeclaration(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDeclaration content:eDeclarationResponseList.contents) {
-            File file = new File(PATH + "EDeclaration/HTML", content.id+".html");
-            String url = URL + "/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "EDeclaration","" );
     }
-    public String ViewXMLEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEDeclaration(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEDeclaration content:eDeclarationResponseList.contents) {
-            File file = new File(PATH + "EDeclaration/XML", content.id+".xml");
-            String url = URL + "/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "EDeclaration","" );
     }
     public String statusEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
     public String downloadXMLEDeclaration(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

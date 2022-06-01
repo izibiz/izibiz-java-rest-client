@@ -6,8 +6,9 @@ import response.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-public class EExchangeAdapter extends Adapter {
+public class EExchangeAdapter extends DocumentAdapter<EExchangeResponse> {
 
     public String URL = BASE_URL + "/" + VERSION + "/exchanges" ;
     Adapter adapter = new Adapter();
@@ -17,59 +18,30 @@ public class EExchangeAdapter extends Adapter {
 
     public EExchangeResponse listEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL;
-        String response = httpClient().send(token, url);
-        eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);
-        return eExchangeResponseList;
+        return list(token, URL, EExchangeResponse.class);
     }
     public EExchangeResponse listByCreationDateEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
-        String response = httpClient().send(token, url);
-        eExchangeResponseList = new Gson().fromJson(response, EExchangeResponse.class);
-        return eExchangeResponseList;
+        return list(token, url, EExchangeResponse.class);
     }
 
-    public String ViewPDFEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFEExchange(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEExchange content:eExchangeResponseList.contents) {
-            File file = new File(PATH + "EExchange/PDF", content.id+".pdf");
-            String url = URL + "/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EExchange" ,"" );
     }
-    public String ViewHTMLEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLEExchange(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEExchange content:eExchangeResponseList.contents) {
-            File file = new File(PATH + "EExchange/HTML", content.id+".html");
-            String url = URL + "/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "EExchange","" );
     }
-    public String ViewXMLEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEExchange(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEExchange content:eExchangeResponseList.contents) {
-            File file = new File(PATH + "EExchange/XML", content.id+".xml");
-            String url = URL + "/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "EExchange","" );
     }
     public String statusEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
 
     public String downloadXMLEExchange(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{

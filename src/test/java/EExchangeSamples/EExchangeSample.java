@@ -8,6 +8,9 @@ import org.junit.jupiter.api.*;
 import response.EExchangeResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EExchangeSample {
     static EExchangeAdapter adapter;
@@ -57,7 +60,7 @@ public class EExchangeSample {
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEExchange(Token);
+        String xml = adapter.viewXMLEExchange(Token, List.of(EExchangeList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -67,7 +70,7 @@ public class EExchangeSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEExchange(Token);
+        String html = adapter.viewHTMLEExchange(Token, List.of(EExchangeList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -77,7 +80,7 @@ public class EExchangeSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEExchange(Token);
+        String pdf = adapter.viewPDFEExchange(Token, List.of(EExchangeList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 

@@ -1,7 +1,7 @@
 package response;
 
 public class ContentECreditNote {
-    public int id;
+    public Long id;
     public Object documentType;
     public String issueDate;
     public String issueTime;
@@ -40,11 +40,11 @@ public class ContentECreditNote {
     public String supplierName;
     public String customerName;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

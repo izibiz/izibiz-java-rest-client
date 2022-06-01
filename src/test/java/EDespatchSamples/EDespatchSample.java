@@ -8,6 +8,9 @@ import org.junit.jupiter.api.*;
 import response.EDespatchResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EDespatchSample {
     static EDespatchAdapter adapter;
@@ -57,7 +60,7 @@ public class EDespatchSample {
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEDespatch(Token);
+        String xml = adapter.viewXMLEDespatch(Token, List.of(EDespatchList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -67,7 +70,7 @@ public class EDespatchSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEDespatch(Token);
+        String html = adapter.viewHTMLEDespatch(Token, List.of(EDespatchList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -77,7 +80,7 @@ public class EDespatchSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewXMLEDespatch(Token);
+        String pdf = adapter.viewXMLEDespatch(Token, List.of(EDespatchList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -95,7 +98,7 @@ public class EDespatchSample {
     @Order(8)
     public void viewHTMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEDespatch_Outbox(Token);
+        String html = adapter.viewHTMLEDespatch_outbox(Token, List.of(EDespatchOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -104,7 +107,7 @@ public class EDespatchSample {
     @Order(9)
     public void viewPDFOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEDespatch_Outbox(Token);
+        String pdf = adapter.viewPDFEDespatch_outbox(Token, List.of(EDespatchOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -113,7 +116,7 @@ public class EDespatchSample {
     @Order(10)
     public void viewXMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEDespatch_Outbox(Token);
+        String xml = adapter.viewXMLEDespatch_outbox(Token, List.of(EDespatchOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 

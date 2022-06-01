@@ -48,8 +48,8 @@ public class EdonusumHttpClient {
             e.printStackTrace();
         }
         return response;
-    }
-    public String sendDownload(String token, String url, DownloadRequest[] body, String path) throws IOException, InterruptedException {
+    }// downloadFile
+    public String downloadFile(String token, String url, DownloadRequest[] body, String path) throws IOException, InterruptedException {
         JsonNode bodyObj=null;
         String response="";
         try{
@@ -87,7 +87,7 @@ public class EdonusumHttpClient {
         return response;
 
     }
-    public String sendFile(String token, String url, File file) throws  IOException, InterruptedException {
+    public String previewFile(String token, String url, File file) throws  IOException, InterruptedException {//previewFile
 
         HttpResponse<byte[]> resp = null;
         try {

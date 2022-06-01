@@ -9,6 +9,9 @@ import response.EArchiveInvoiceGibIvdResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EArchiveInvoiceGibIvdSample {
     static EArchiveInvoiceGibIvdAdapter adapter;
@@ -41,7 +44,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(2)
     public void canList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EArchiveInvoiceGibIvdList = adapter.listEArchiveEArchiveInvoiceGibIvd(Token);
+        EArchiveInvoiceGibIvdList = adapter.listEArchiveInvoiceGibIvd(Token);
         Assertions.assertNotNull(EArchiveInvoiceGibIvdList.getContent()[0]);
         System.out.println(EArchiveInvoiceGibIvdList.getContent()[0].id);
 
@@ -77,7 +80,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(6)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEArchiveInvoiceGibIvd(Token);
+        String xml = adapter.viewXMLEArchiveInvoiceGibIvd(Token, List.of(EArchiveInvoiceGibIvdList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -87,7 +90,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(7)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEArchiveInvoiceGibIvd(Token);
+        String html = adapter.ViewHTMLEArchiveInvoiceGibIvd(Token, List.of(EArchiveInvoiceGibIvdList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -97,7 +100,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(8)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEArchiveInvoiceGibIvd(Token);
+        String pdf = adapter.ViewPDFEArchiveInvoiceGibIvd(Token, List.of(EArchiveInvoiceGibIvdList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
@@ -106,7 +109,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(9)
     public void viewXMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEArchiveInvoiceGibIvd_Outbox(Token);
+        String xml = adapter.viewXMLEArchiveInvoiceGibIvd_outbox(Token, List.of(EArchiveInvoiceGibIvdOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -116,7 +119,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(10)
     public void viewHTMLOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEArchiveInvoiceGibIvd_Outbox(Token);
+        String html = adapter.viewHTMLEArchiveInvoiceGibIvd_outbox(Token, List.of(EArchiveInvoiceGibIvdOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -126,7 +129,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(11)
     public void viewPDFOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEArchiveInvoiceGibIvd_Outbox(Token);
+        String pdf = adapter.viewPDFEArchiveInvoiceGibIvd_outbox(Token, List.of(EArchiveInvoiceGibIvdOutbox.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 

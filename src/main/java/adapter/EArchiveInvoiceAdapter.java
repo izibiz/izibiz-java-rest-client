@@ -5,12 +5,15 @@ import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.ContentEArchiveInvoice;
 import response.EArchiveInvoiceResponse;
+import response.ECheckResponse;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 
-public class EArchiveInvoiceAdapter extends Adapter {
+public class EArchiveInvoiceAdapter extends DocumentAdapter<EArchiveInvoiceResponse> {
 
     public String URL = BASE_URL + "/" + VERSION + "/earchives/" ;
     Adapter adapter = new Adapter();
@@ -19,56 +22,28 @@ public class EArchiveInvoiceAdapter extends Adapter {
 
     public EArchiveInvoiceResponse listEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL;
-        String response = httpClient().send(token, url);
-        eArchiveInvoiceResponseList = new Gson().fromJson(response, EArchiveInvoiceResponse.class);
-
-        return eArchiveInvoiceResponseList;
+        return list(token, URL, EArchiveInvoiceResponse.class);
     }
 
-    public String ViewPDFEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewPDFEArchiveInvoice(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-
-        String response="";
-        for (ContentEArchiveInvoice content:eArchiveInvoiceResponseList.contents) {
-            File file = new File(PATH + "EArchiveInvoice/PDF", content.id+".pdf");
-            String url = URL + content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "EArchiveInvoice", "" );
     }
-    public String ViewHTMLEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String ViewHTMLEArchiveInvoice(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoice content:eArchiveInvoiceResponseList.contents) {
-            File file = new File(PATH + "EArchiveInvoice/HTML", content.id+".html");
-            String url = URL + content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "EArchiveInvoice", "" );
     }
-    public String ViewXMLEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLEArchiveInvoice(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentEArchiveInvoice content:eArchiveInvoiceResponseList.contents) {
-            File file = new File(PATH + "EArchiveInvoice/XML", content.id+".xml");
-            String url = URL + content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
-
+        return view(token, URL, idList, "ubl", "XML", "EArchiveInvoice", "" );
     }
+
+
+
     public String statusEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL + "/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        String url = URL +"/lookup-statuses";
+        return listStatus(token, url);
     }
     public String downloadXMLEArchiveInvoice(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

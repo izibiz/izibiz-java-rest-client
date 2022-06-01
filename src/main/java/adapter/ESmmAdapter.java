@@ -3,12 +3,14 @@ package adapter;
 import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.ContentESmm;
+import response.EInvoiceResponse;
 import response.ESmmResponse;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
-public class ESmmAdapter extends Adapter {
+public class ESmmAdapter extends DocumentAdapter<ESmmResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/esmms" ;
     Adapter adapter = new Adapter();
     ESmmResponse eSmmResponseList;
@@ -17,10 +19,7 @@ public class ESmmAdapter extends Adapter {
 
     public ESmmResponse listESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
-        String url = URL;
-        String response = httpClient().send(token, url);
-        eSmmResponseList = new Gson().fromJson(response, ESmmResponse.class);
-        return eSmmResponseList;
+        return list(token, URL, ESmmResponse.class);
     }
     public ESmmResponse listByCreationDateESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
@@ -30,46 +29,22 @@ public class ESmmAdapter extends Adapter {
         return eSmmResponseList;
     }
 
-    public String ViewPDFESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewPDFESmm(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentESmm content:eSmmResponseList.contents) {
-            File file = new File(PATH + "Esmm/PDF", content.id+".pdf");
-            String url = URL + "/"+ content.id + "/preview/pdf";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "pdf", "PDF", "ESmm","" );
     }
-    public String ViewHTMLESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewHTMLESmm(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentESmm content:eSmmResponseList.contents) {
-            File file = new File(PATH + "Esmm/HTML", content.id+".html");
-            String url = URL + "/"+ content.id + "/preview/html";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
-
+        return view(token, URL, idList, "html", "HTML", "ESmm","" );
     }
-    public String ViewXMLESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
+    public String viewXMLESmm(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        String response="";
-        for (ContentESmm content:eSmmResponseList.contents) {
-            File file = new File(PATH + "Esmm/XML", content.id+".xml");
-            String url = URL + "/"+ content.id + "/preview/ubl";
-            response = httpClient().sendFile(token, url, file);
-        }
-
-        return response;
+        return view(token, URL, idList, "ubl", "XML", "ESmm","" );
     }
     public String statusESmm(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";
-        String response = httpClient().send(token, url);
-        return response;
+        return listStatus(token, url);
     }
     public String downloadXMLESmm(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

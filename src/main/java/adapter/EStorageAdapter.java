@@ -2,11 +2,12 @@ package adapter;
 
 import com.google.gson.Gson;
 import model.DownloadRequest;
+import response.ESmmResponse;
 import response.EStorageResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-public class EStorageAdapter extends Adapter{
+public class EStorageAdapter extends DocumentAdapter<EStorageResponse>{
 
     public String URL = BASE_URL + "/" + VERSION + "/archives" ;
 
@@ -15,51 +16,37 @@ public class EStorageAdapter extends Adapter{
     public EStorageResponse listEInvoicesOutbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/invoices/outbox?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
-    public EStorageResponse listEInvoicesInbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public EStorageResponse listEInvoicesInbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
         String url = URL + "/invoices/inbox?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
     public EStorageResponse listEDespatchesOutbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL+ "/despatches/outbox?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
     public EStorageResponse listEDespatchesInbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL+ "/despatches/inbox?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
     public EStorageResponse listEDespatchReceiptsOutbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/receipts/outbox?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
     public EStorageResponse listEDespatchReceiptsInbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/receipts/inbox?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
     public EStorageResponse listECreditNotes(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL + "/creditnotes?sort=asc&sortProperty=id";
-        String response = httpClient().send(token, url);
-        eStorageResponse = new Gson().fromJson(response, EStorageResponse.class);
-        return eStorageResponse;
+        return list(token, url, EStorageResponse.class);
     }
 
     public String downloadXMLEStorageEInvoicesInbox(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{

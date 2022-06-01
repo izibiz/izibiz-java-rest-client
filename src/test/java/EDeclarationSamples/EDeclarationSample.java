@@ -8,6 +8,9 @@ import org.junit.jupiter.api.*;
 import response.EDeclarationResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class EDeclarationSample {
     static EDeclarationAdapter adapter;
@@ -57,7 +60,7 @@ public class EDeclarationSample {
     @Order(4)
     public void viewXML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String xml = adapter.ViewXMLEDeclaration(Token);
+        String xml = adapter.viewXMLEDeclaration(Token, List.of(EDeclarationList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(xml);
         System.out.println(xml);
 
@@ -67,7 +70,7 @@ public class EDeclarationSample {
     @Order(5)
     public void viewHTML() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String html = adapter.ViewHTMLEDeclaration(Token);
+        String html = adapter.viewHTMLEDeclaration(Token, List.of(EDeclarationList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(html);
         System.out.println(html);
 
@@ -77,7 +80,7 @@ public class EDeclarationSample {
     @Order(6)
     public void viewPDF() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String pdf = adapter.ViewPDFEDeclaration(Token);
+        String pdf = adapter.viewPDFEDeclaration(Token, List.of(EDeclarationList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(pdf);
         System.out.println(pdf);
 
