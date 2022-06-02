@@ -1,8 +1,6 @@
 package adapter;
 
-import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.ESmmResponse;
 import response.EStorageResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -10,8 +8,6 @@ import java.net.URISyntaxException;
 public class EStorageAdapter extends DocumentAdapter<EStorageResponse>{
 
     public String URL = BASE_URL + "/" + VERSION + "/archives" ;
-
-    EStorageResponse eStorageResponse;
 
     public EStorageResponse listEInvoicesOutbox(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

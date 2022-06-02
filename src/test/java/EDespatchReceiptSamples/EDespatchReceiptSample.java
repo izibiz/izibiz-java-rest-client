@@ -51,7 +51,7 @@ public class EDespatchReceiptSample {
     @Order(3)
     public void statusInquiry() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.StatusInquiryEDespatchReceipt(Token);
+        String status = adapter.statusInquiryEDespatchReceipt(Token, List.of(EDespatchReceiptList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(status);
         System.out.println(status);
 

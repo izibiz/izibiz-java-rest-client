@@ -1,9 +1,7 @@
 package adapter;
 
-import com.google.gson.Gson;
 import model.DownloadRequest;
 import response.*;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -11,10 +9,6 @@ import java.util.List;
 public class EExchangeAdapter extends DocumentAdapter<EExchangeResponse> {
 
     public String URL = BASE_URL + "/" + VERSION + "/exchanges" ;
-    Adapter adapter = new Adapter();
-    EExchangeResponse eExchangeResponseList;
-    EExchangeResponse eExchangeResponseList2;
-    EExchangeResponse eExchangeResponse;
 
     public EExchangeResponse listEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
@@ -28,15 +22,15 @@ public class EExchangeAdapter extends DocumentAdapter<EExchangeResponse> {
 
     public String viewPDFEExchange(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "pdf", "PDF", "EExchange" ,"" );
+        return viewDocument(token, URL, idList, "pdf", "PDF", "EExchange" ,"" );
     }
     public String viewHTMLEExchange(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "html", "HTML", "EExchange","" );
+        return viewDocument(token, URL, idList, "html", "HTML", "EExchange","" );
     }
     public String viewXMLEExchange(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "ubl", "XML", "EExchange","" );
+        return viewDocument(token, URL, idList, "ubl", "XML", "EExchange","" );
     }
     public String statusEExchange(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

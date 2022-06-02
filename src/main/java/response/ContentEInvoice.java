@@ -1,8 +1,6 @@
 package response;
 
-import java.time.LocalDate;
-
-public class Content {
+public class ContentEInvoice {
     public Long id;
     public Object documentType;
     public String issueDate;

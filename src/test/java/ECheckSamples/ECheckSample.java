@@ -5,7 +5,10 @@ import adapter.ECheckAdapter;
 import model.DownloadRequest;
 import model.LoginRequest;
 import org.junit.jupiter.api.*;
+import response.DataSeries;
 import response.ECheckResponse;
+import response.SeriesResponse;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -17,6 +20,8 @@ public class ECheckSample {
     static ECheckResponse ECheckList;
     static ECheckResponse ECheckList2;
     static adapter.AuthAdapter AuthAdapter;
+    static SeriesResponse seriesResponse;
+    static DataSeries dataSeries;
 
     static String Token ;
     public static String list;
@@ -124,4 +129,15 @@ public class ECheckSample {
         Assertions.assertNotNull(status);
         System.out.println(status);
     }
+    @Test
+    @Order(11)
+    public void listSeries() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+
+        seriesResponse=adapter.listSeriesECheck(Token);
+        Assertions.assertNotNull(seriesResponse);
+        System.out.println("****************************************");
+        System.out.println(seriesResponse.getDatas()[0].getId());
+
+    }
+
 }

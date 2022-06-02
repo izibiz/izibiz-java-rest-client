@@ -48,7 +48,47 @@ public class EdonusumHttpClient {
             e.printStackTrace();
         }
         return response;
-    }// downloadFile
+    }
+
+
+
+
+
+    public String sendSeries(String token, String url) throws IOException, InterruptedException {
+        JsonNode bodyObj=null;
+        String response="";
+
+        try{
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .setHeader("Authorization","Bearer " + token)
+                    .GET()
+                    .build();
+
+            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            bodyObj = mapper.readTree(resp.body());
+
+            if(null == bodyObj) {
+                bodyObj = mapper.readTree(resp.body()).get("error");
+            }
+            response = bodyObj.asText();
+
+            if(StringUtils.isEmpty(response)) {
+                response = bodyObj.asText();
+            }
+        } catch (URISyntaxException e){
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+
+
+
+
+
+
     public String downloadFile(String token, String url, DownloadRequest[] body, String path) throws IOException, InterruptedException {
         JsonNode bodyObj=null;
         String response="";

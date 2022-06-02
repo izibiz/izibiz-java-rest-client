@@ -1,22 +1,14 @@
 package adapter;
 
-import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.ContentECreditNote;
-import response.EArchiveInvoiceGibIvdResponse;
-import response.ECheckResponse;
 import response.ECreditNoteResponse;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
 public class ECreditNoteAdapter extends DocumentAdapter<ECreditNoteResponse> {
     public String URL = BASE_URL + "/" + VERSION + "/ecreditnotes" ;
-    Adapter adapter = new Adapter();
-    ECreditNoteResponse eCreditNoteResponseList;
-    ECreditNoteResponse eCreditNoteResponseList_outbox;
-    ECreditNoteResponse eCreditNoteResponse;
+
     public ECreditNoteResponse listECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         return list(token, URL, ECreditNoteResponse.class);
@@ -28,15 +20,15 @@ public class ECreditNoteAdapter extends DocumentAdapter<ECreditNoteResponse> {
     }
     public String viewPDFECreditNote(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "pdf", "PDF", "ECreditNote","" );
+        return viewDocument(token, URL, idList, "pdf", "PDF", "ECreditNote","" );
     }
     public String viewHTMLECreditNote(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "html", "HTML", "ECreditNote","" );
+        return viewDocument(token, URL, idList, "html", "HTML", "ECreditNote","" );
     }
     public String viewXMLECreditNote(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "ubl", "XML", "ECreditNote","" );
+        return viewDocument(token, URL, idList, "ubl", "XML", "ECreditNote","" );
     }
     public String statusECreditNote(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

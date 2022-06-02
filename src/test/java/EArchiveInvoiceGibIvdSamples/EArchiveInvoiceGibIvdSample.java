@@ -62,7 +62,7 @@ public class EArchiveInvoiceGibIvdSample {
     @Order(4)
     public void canListOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EArchiveInvoiceGibIvdOutbox2 = adapter.listByCreationDateEArchiveInvoiceGibIvd_Outbox(Token);
+        EArchiveInvoiceGibIvdOutbox2 = adapter.listEArchiveInvoiceGibIvd_Outbox(Token);
         Assertions.assertNotNull(EArchiveInvoiceGibIvdOutbox2.getContent()[0]);
         System.out.println(EArchiveInvoiceGibIvdOutbox2.getContent()[0].id);
 

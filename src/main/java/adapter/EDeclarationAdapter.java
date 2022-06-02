@@ -1,21 +1,14 @@
 package adapter;
 
-import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.ContentEDeclaration;
-import response.ECreditNoteResponse;
 import response.EDeclarationResponse;
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
 public class EDeclarationAdapter extends DocumentAdapter<EDeclarationResponse> {
+
     public String URL = BASE_URL + "/" + VERSION + "/edeclarations" ;
-    Adapter adapter = new Adapter();
-    EDeclarationResponse eDeclarationResponseList;
-    EDeclarationResponse eDeclarationResponseList2;
-    EDeclarationResponse eDeclarationResponse;
 
     public EDeclarationResponse listEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
@@ -29,15 +22,15 @@ public class EDeclarationAdapter extends DocumentAdapter<EDeclarationResponse> {
 
     public String viewPDFEDeclaration(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "pdf", "PDF", "EDeclaration","" );
+        return viewDocument(token, URL, idList, "pdf", "PDF", "EDeclaration","" );
     }
     public String viewHTMLEDeclaration(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "html", "HTML", "EDeclaration","" );
+        return viewDocument(token, URL, idList, "html", "HTML", "EDeclaration","" );
     }
     public String viewXMLEDeclaration(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "ubl", "XML", "EDeclaration","" );
+        return viewDocument(token, URL, idList, "ubl", "XML", "EDeclaration","" );
     }
     public String statusEDeclaration(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 

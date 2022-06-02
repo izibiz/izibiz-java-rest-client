@@ -20,7 +20,6 @@ public class EInvoiceSample {
     static AuthAdapter AuthAdapter;
 
     static String Token ;
-    public static String list;
 
     @BeforeAll
     public static void init() {
@@ -55,7 +54,7 @@ public class EInvoiceSample {
     @Order(3)
     public void pendingApprovalList() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EInvoice = adapter.pendingApprovalEinvoice(Token);
+        EInvoice = adapter.pendingApprovalEInvoice(Token);
         Assertions.assertNotNull(EInvoice.getContent()[0]);
         System.out.println(EInvoice.getContent()[0].id);
 
@@ -94,7 +93,7 @@ public class EInvoiceSample {
     @Order(7)
     public void statusInquiry() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        String status = adapter.StatusInquiryEInvoice(Token);
+        String status = adapter.statusInquiryEInvoice(Token,List.of(EInvoiceList.contents).stream().map(c->c.getId()).collect(Collectors.toList()));
         Assertions.assertNotNull(status);
         System.out.println(status);
 
@@ -154,7 +153,7 @@ public class EInvoiceSample {
     @Order(13)
     public void pendingApprovalListOutbox() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
 
-        EInvoice = adapter.UndeliverableAnswerEInvoice_Outbox(Token);
+        EInvoice = adapter.pendingApprovalEInvoice_Outbox(Token);
         Assertions.assertNotNull(EInvoice.getContent()[0]);
         System.out.println(EInvoice.getContent()[0]);
 

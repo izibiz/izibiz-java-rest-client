@@ -1,17 +1,17 @@
 package adapter;
 
-import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.ContentECheck;
+import response.DataSeries;
 import response.ECheckResponse;
-import java.io.File;
+import response.SeriesResponse;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
 public class ECheckAdapter extends DocumentAdapter<ECheckResponse> {
-    public String URL = BASE_URL + "/" + VERSION + "/echecks" ;
 
+    public String URL = BASE_URL + "/" + VERSION + "/echecks" ;
 
     public ECheckResponse listECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
@@ -20,21 +20,20 @@ public class ECheckAdapter extends DocumentAdapter<ECheckResponse> {
     public ECheckResponse listByCreationDateECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"?page=0&pageSize=20&sortProperty=createDate&sort=desc";
-
         return list(token, url, ECheckResponse.class);
     }
 
     public String viewPDFECheck(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "pdf", "PDF", "ECheck","" );
+        return viewDocument(token, URL, idList, "pdf", "PDF", "ECheck","" );
     }
     public String viewHTMLECheck(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "html", "HTML", "ECheck","" );
+        return viewDocument(token, URL, idList, "html", "HTML", "ECheck","" );
     }
     public String viewXMLECheck(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "ubl", "XML", "ECheck","" );
+        return viewDocument(token, URL, idList, "ubl", "XML", "ECheck","" );
     }
     public String statusECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
@@ -52,5 +51,10 @@ public class ECheckAdapter extends DocumentAdapter<ECheckResponse> {
     public String downloadPDFECheck(String token, DownloadRequest[] body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         return downloadDocument(token, body, URL+"/download/pdf", "ECheck/PDF/Downloads/");
+    }
+    public SeriesResponse listSeriesECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        String url=URL +"/series";
+        return listSeries(token, url, SeriesResponse.class);
     }
 }

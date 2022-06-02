@@ -1,13 +1,7 @@
 package adapter;
 
-
-import com.google.gson.Gson;
 import model.DownloadRequest;
-import response.ContentEArchiveInvoice;
 import response.EArchiveInvoiceResponse;
-import response.ECheckResponse;
-
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -16,30 +10,23 @@ import java.util.List;
 public class EArchiveInvoiceAdapter extends DocumentAdapter<EArchiveInvoiceResponse> {
 
     public String URL = BASE_URL + "/" + VERSION + "/earchives/" ;
-    Adapter adapter = new Adapter();
-    EArchiveInvoiceResponse EArchiveInvoiceResponse;
-    EArchiveInvoiceResponse eArchiveInvoiceResponseList;
 
     public EArchiveInvoiceResponse listEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         return list(token, URL, EArchiveInvoiceResponse.class);
     }
-
     public String ViewPDFEArchiveInvoice(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "pdf", "PDF", "EArchiveInvoice", "" );
+        return viewDocument(token, URL, idList, "pdf", "PDF", "EArchiveInvoice", "" );
     }
     public String ViewHTMLEArchiveInvoice(String token,  List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "html", "HTML", "EArchiveInvoice", "" );
+        return viewDocument(token, URL, idList, "html", "HTML", "EArchiveInvoice", "" );
     }
     public String viewXMLEArchiveInvoice(String token, List<Long> idList) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
-        return view(token, URL, idList, "ubl", "XML", "EArchiveInvoice", "" );
+        return viewDocument(token, URL, idList, "ubl", "XML", "EArchiveInvoice", "" );
     }
-
-
-
     public String statusEArchiveInvoice(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url = URL +"/lookup-statuses";

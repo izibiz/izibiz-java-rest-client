@@ -2,10 +2,6 @@ package adapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import http.EdonusumHttpClient;
-import model.DownloadRequest;
-
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -31,7 +27,6 @@ public class Adapter {
         headers = new HashMap<>();
         mapper = new ObjectMapper();
     }
-
 
     public ObjectMapper mapper() {
         return this.mapper;

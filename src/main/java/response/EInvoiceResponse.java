@@ -2,10 +2,10 @@ package response;
 
 public class EInvoiceResponse {
 
-    public Content[] contents;
+    public ContentEInvoice[] contents;
 
-    public Content[] getContent() {return contents;}
-    public void setContents(Content[] contents) {this.contents = contents;}
+    public ContentEInvoice[] getContent() {return contents;}
+    public void setContents(ContentEInvoice[] contents) {this.contents = contents;}
 
     public Pageable pageable;
 

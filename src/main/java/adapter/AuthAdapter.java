@@ -3,7 +3,6 @@ package adapter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.LoginRequest;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
