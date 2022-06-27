@@ -1,9 +1,8 @@
 package adapter;
 
 import model.DownloadRequest;
-import response.DataSeries;
-import response.ECheckResponse;
 import response.SeriesResponse;
+import response.ECheckResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -52,9 +51,9 @@ public class ECheckAdapter extends DocumentAdapter<ECheckResponse> {
 
         return downloadDocument(token, body, URL+"/download/pdf", "ECheck/PDF/Downloads/");
     }
-    public SeriesResponse listSeriesECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+    public SeriesResponse[] listSeriesECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url=URL +"/series";
-        return listSeries(token, url, SeriesResponse.class);
+        return listSeries(token, url, SeriesResponse[].class);
     }
 }

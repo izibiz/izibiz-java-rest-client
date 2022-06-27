@@ -67,15 +67,15 @@ public class EdonusumHttpClient {
 
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            bodyObj = mapper.readTree(resp.body());
+            bodyObj = mapper.readTree(resp.body()).get("data");
 
             if(null == bodyObj) {
                 bodyObj = mapper.readTree(resp.body()).get("error");
             }
-            response = bodyObj.asText();
+            response = bodyObj.toString();
 
             if(StringUtils.isEmpty(response)) {
-                response = bodyObj.asText();
+                response = bodyObj.toString();
             }
         } catch (URISyntaxException e){
             e.printStackTrace();
