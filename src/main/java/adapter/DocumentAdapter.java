@@ -2,6 +2,8 @@ package adapter;
 
 import com.google.gson.Gson;
 import model.DownloadRequest;
+import model.XsltRequest;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -44,8 +46,14 @@ public class DocumentAdapter<Response> extends Adapter{
         return httpClient().downloadFile(token, URL, body, filePath);
     }
 
-    public <Response> Response listSeries(String token, String url, Class<Response> responseType) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
-        String response = httpClient().sendSeries(token, url);
+    public <Response> Response listSeriesXslt(String token, String url, Class<Response> responseType) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+        String response = httpClient().listSeriesXslt(token, url);
+        return new Gson().fromJson(response,responseType);
+
+    }
+
+    public <Response> Response loadXslt(String token, XsltRequest body, String url, Class<Response> responseType) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+        String response = httpClient().loadXslt(token, url, body);
         return new Gson().fromJson(response,responseType);
 
     }

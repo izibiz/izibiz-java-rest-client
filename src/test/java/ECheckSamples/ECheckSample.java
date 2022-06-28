@@ -4,9 +4,11 @@ import adapter.AuthAdapter;
 import adapter.ECheckAdapter;
 import model.DownloadRequest;
 import model.LoginRequest;
+import model.XsltRequest;
 import org.junit.jupiter.api.*;
 import response.SeriesResponse;
 import response.ECheckResponse;
+import response.XsltResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -20,7 +22,8 @@ public class ECheckSample {
     static ECheckResponse ECheckList2;
     static adapter.AuthAdapter AuthAdapter;
     static SeriesResponse[] seriesResponse;
-    static SeriesResponse dataSeries;
+    static XsltResponse[] xsltResponse;
+    static XsltResponse xsltLoadResponse;
 
     static String Token ;
     public static String list;
@@ -131,12 +134,26 @@ public class ECheckSample {
     @Test
     @Order(11)
     public void listSeries() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
-
         seriesResponse=adapter.listSeriesECheck(Token);
         Assertions.assertNotNull(seriesResponse);
-        System.out.println("****************************************");
         System.out.println(seriesResponse[0].getId());
 
     }
+    @Test
+    @Order(12)
+    public void listXslt() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        xsltResponse = adapter.listXsltECheck(Token);
+        Assertions.assertNotNull(xsltResponse);
+        System.out.println(xsltResponse[0].getId());
 
+    }
+    @Test
+    @Order(13)
+    public void loadXslt() throws URISyntaxException, IOException, NoSuchFieldException, InterruptedException, IllegalAccessException {
+        XsltRequest xsltRequest = new XsltRequest(xsltResponse[0].getName()+"1",xsltResponse[0].getDescription(),xsltResponse[0].getContent());
+        xsltLoadResponse = adapter.loadXsltECheck(Token,xsltRequest);
+        Assertions.assertNotNull(xsltResponse);
+        System.out.println(xsltResponse[0].getId());
+
+    }
 }

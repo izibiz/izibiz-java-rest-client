@@ -1,8 +1,10 @@
 package adapter;
 
 import model.DownloadRequest;
+import model.XsltRequest;
 import response.SeriesResponse;
 import response.ECheckResponse;
+import response.XsltResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -54,6 +56,17 @@ public class ECheckAdapter extends DocumentAdapter<ECheckResponse> {
     public SeriesResponse[] listSeriesECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
 
         String url=URL +"/series";
-        return listSeries(token, url, SeriesResponse[].class);
+        return listSeriesXslt(token, url, SeriesResponse[].class);
     }
+    public XsltResponse[] listXsltECheck(String token) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        String url=URL +"/xslts";
+        return listSeriesXslt(token, url, XsltResponse[].class);
+    }
+    public XsltResponse loadXsltECheck(String token, XsltRequest body) throws URISyntaxException, IOException, InterruptedException, NoSuchFieldException, IllegalAccessException{
+
+        String url=URL +"/xslts";
+        return loadXslt(token, body, url, XsltResponse.class);
+    }
+
 }

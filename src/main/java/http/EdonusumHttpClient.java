@@ -3,6 +3,7 @@ package http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.DownloadRequest;
+import model.XsltRequest;
 import org.apache.commons.lang3.StringUtils;
 
 
@@ -54,7 +55,7 @@ public class EdonusumHttpClient {
 
 
 
-    public String sendSeries(String token, String url) throws IOException, InterruptedException {
+    public String listSeriesXslt(String token, String url) throws IOException, InterruptedException {
         JsonNode bodyObj=null;
         String response="";
 
@@ -63,6 +64,40 @@ public class EdonusumHttpClient {
                     .uri(new URI(url))
                     .setHeader("Authorization","Bearer " + token)
                     .GET()
+                    .build();
+
+            HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            bodyObj = mapper.readTree(resp.body()).get("data");
+
+            if(null == bodyObj) {
+                bodyObj = mapper.readTree(resp.body()).get("error");
+            }
+            response = bodyObj.toString();
+
+            if(StringUtils.isEmpty(response)) {
+                response = bodyObj.toString();
+            }
+        } catch (URISyntaxException e){
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+
+
+    public String loadXslt(String token, String url, XsltRequest body) throws IOException, InterruptedException {
+        JsonNode bodyObj=null;
+        String response="";
+
+        try{
+            ObjectMapper mapper = new ObjectMapper();
+            String bodyJson = mapper.writeValueAsString(body);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(url))
+                    .setHeader("Authorization","Bearer " + token)
+                    .setHeader("Content-Type","application/json ")
+                    .POST(HttpRequest.BodyPublishers.ofString(bodyJson))
                     .build();
 
             HttpResponse<String> resp = client.send(request, HttpResponse.BodyHandlers.ofString());
